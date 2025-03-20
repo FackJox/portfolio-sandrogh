@@ -25,8 +25,8 @@ vibes
 
 ## Phase 4: Section Components
 - [x] Implement Hero Section Tests
-- [ ] Implement Featured Work Carousel Tests
-- [ ] Implement Contact Section Tests
+- [x] Implement Featured Work Carousel Tests
+- [x] Implement Contact Section Tests
 
 ## Phase 5: Custom Hooks
 - [ ] Implement useToast Hook Tests

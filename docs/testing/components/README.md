@@ -1,179 +1,229 @@
-# UI Component Testing
+# Component Testing Documentation
 
-This document provides guidelines and examples for testing UI components in the Sandro Portfolio project.
+This directory contains detailed documentation for each component's test suite in the Sandro Portfolio project.
 
-## Component Testing Approach
+## UI Components
 
-We use React Testing Library to test our UI components, focusing on testing the components from a user's perspective rather than implementation details.
+### Form Components
+- [Button](./button.md) - Implementation of the Button component tests
+- [Checkbox](./checkbox.md) - Implementation of the Checkbox component tests
+- [Input](./input.md) - Implementation of the Input component tests
+- [Textarea](./textarea.md) - Implementation of the Textarea component tests
+- [Select](./select.md) - Implementation of the Select component tests
+- [Form](./form.md) - Implementation of the Form component tests
 
-## Tested Components
+### Overlay Components
+- [Dialog](./dialog.md) - Implementation of the Dialog component tests
+- [Dropdown Menu](./dropdown-menu.md) - Implementation of the Dropdown Menu component tests
+- [Popover](./popover.md) - Implementation of the Popover component tests
 
-The following components have comprehensive test coverage:
+### Feedback Components
+- [Toast](./toast.md) - Implementation of the Toast component tests
 
-1. [Button Component](button.md) - Testing various variants, sizes, loading states, disabled state behavior, keyboard interaction, focus styles, accessibility features, event handlers, and rendering as different HTML elements
-2. [Input Component](input.md) - Testing rendering, controlled input, disabled state, events, accessibility, and ref forwarding
-3. [Checkbox Component](checkbox.md) - Testing rendering, state management, keyboard interactions, accessibility, and form integration
-4. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
-5. [Hero Section Component](hero.md) - Testing headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
-6. [About Section Component](about.md) - Testing section title, biography text, image rendering, client logo grid, responsive layout, and accessibility
-7. [Dialog Component](dialog.md) - Testing component rendering, accessibility, and interaction
+## Layout Components
+- [Header](./header.md) - Implementation of the Header component tests
 
-### Recent Additions
+## Section Components
+- [Hero](./hero.md) - Implementation of the Hero section component tests
+- [About](./about.md) - Implementation of the About section component tests
+- [Featured Work Carousel](./featured-work-carousel.md) - Implementation of the Featured Work Carousel component tests
 
-The Checkbox component tests were recently enhanced, achieving 100% code coverage:
-- Tests rendering in different states (checked/unchecked)
-- Tests both controlled and uncontrolled behavior
-- Tests keyboard interactions (Space key toggle)
-- Tests label associations and click behavior
-- Verifies accessibility features (ARIA attributes, focus indicators)
-- Tests form integration and value submission
+## Testing Patterns
 
-The About section component tests were recently added, achieving 100% code coverage:
-- Tests section title and biography text rendering
-- Tests photographer portrait image with correct attributes
-- Verifies client logo grid layout and rendering
-- Tests responsive layout classes and styling
-- Ensures proper accessibility attributes and semantic structure
-- Uses appropriate mocks for Next.js components (Image)
+This section outlines common patterns used across component tests.
 
-The Hero section component tests were recently added, achieving 100% code coverage across all metrics:
-- Tests main headline and subheadline text rendering
-- Tests call-to-action buttons and their links
-- Verifies image loading with correct attributes
-- Tests responsive layout classes and styling
-- Ensures proper accessibility attributes and semantic structure
-- Uses appropriate mocks for Next.js components (Image, Link)
+### Component Render Testing
 
-The Header component tests were recently added, testing both structure and behavior:
-- Tests navigation links and routing
-- Tests responsive mobile navigation with Sheet component
-- Verifies accessibility features and proper ARIA attributes
-- Tests styling and layout using Tailwind classes
+All components should test their rendering behavior:
 
-The Input component tests were previously added, achieving 100% code coverage across all metrics:
-- **Statements**: 100%
-- **Branches**: 100%
-- **Functions**: 100%
-- **Lines**: 100%
-
-These tests cover a range of functionalities from basic rendering to complex behaviors like controlled inputs, form submission, and accessibility.
-
-## Testing Radix UI Components
-
-When testing components that use Radix UI primitives:
-
-1. Test the component's accessibility features
-2. Verify proper prop forwarding
-3. Test state transitions and event handling
-4. Verify that variants and sizes work as expected
-
-## Example Test
-
-```tsx
-import { render, screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Button } from '@/components/ui/button';
-
-describe('Button', () => {
-  it('renders correctly', () => {
-    render(<Button>Click me</Button>);
-    const button = screen.getByRole('button', { name: /click me/i });
-    expect(button).toBeInTheDocument();
-  });
-
-  it('handles click events', async () => {
-    const handleClick = jest.fn();
-    render(<Button onClick={handleClick}>Click me</Button>);
-    
-    const button = screen.getByRole('button', { name: /click me/i });
-    await userEvent.click(button);
-    
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-
-  it('applies different variants', () => {
-    const { rerender } = render(<Button variant="default">Button</Button>);
-    
-    let button = screen.getByRole('button', { name: /button/i });
-    expect(button).toHaveClass('bg-primary');
-    
-    rerender(<Button variant="destructive">Button</Button>);
-    button = screen.getByRole('button', { name: /button/i });
-    expect(button).toHaveClass('bg-destructive');
-  });
-  
-  it('renders correctly in loading state', () => {
-    render(<Button isLoading>Loading</Button>);
-    
-    const button = screen.getByRole('button');
-    const spinner = within(button).getByRole('status');
-    
-    expect(spinner).toBeInTheDocument();
-    expect(button).toBeDisabled();
-    expect(button).toHaveTextContent('Loading');
-  });
-  
-  it('handles keyboard interaction', async () => {
-    const handleClick = jest.fn();
-    const user = userEvent.setup();
-    
-    render(<Button onClick={handleClick}>Press Enter</Button>);
-    
-    const button = screen.getByRole('button', { name: 'Press Enter' });
-    button.focus();
-    
-    await user.keyboard('{Enter}');
-    expect(handleClick).toHaveBeenCalledTimes(1);
-    
-    expect(button).toHaveClass('focus-visible:ring-2');
+```typescript
+describe("Rendering", () => {
+  it("renders correctly with default props", () => {
+    render(<Component />);
+    // Assertions about the rendered output
   });
 });
-
-## Testing Component Composition
-
-For components with multiple parts (e.g., Dialog with Dialog.Trigger, Dialog.Content), test each part individually and then test the integration.
-
-## Mocking Context Providers
-
-When testing components that rely on context providers:
-
-```tsx
-// Example: Wrapping a component with ThemeProvider for testing
-import { render } from '@testing-library/react';
-import { ThemeProvider } from '@/components/theme-provider';
-
-const customRender = (ui, options) =>
-  render(ui, { wrapper: ThemeProvider, ...options });
-
-// use customRender instead of render from RTL
 ```
 
-## Progress Tracking
+### State Management Testing
 
-The following components now have complete test coverage:
-- Button: 100%
-- Checkbox: 100%
-- Input: 100%
-- InputOTP: ~96%
-- Hero Section: 100%
-- About Section: 100%
-- Dialog: 92%
+For components with internal state:
 
-We have continued testing section components with About.tsx, achieving 100% coverage.
+```typescript
+describe("State Management", () => {
+  it("updates state when interacted with", async () => {
+    const user = userEvent.setup();
+    render(<Component />);
+    
+    // Interact with the component
+    await user.click(screen.getByRole("button"));
+    
+    // Verify state change
+    expect(screen.getByRole("button")).toHaveAttribute("data-state", "active");
+  });
+});
+```
 
-Our next focus areas include:
-- Other section components (Contact, MediaCategories, Testimonials, etc.)
-- Form component
-- Select component
-- Textarea component 
+### User Interaction Testing
 
-## Additional Resources
+For interactive components:
 
-For more detailed information about testing specific component types, refer to:
+```typescript
+describe("User Interaction", () => {
+  it("calls the onClick handler when clicked", async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    render(<Component onClick={handleClick} />);
+    
+    await user.click(screen.getByRole("button"));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+```
 
-- [Form Component Testing Guide](../form-testing.md)
-- [Accessibility Testing Guide](../accessibility-testing.md)
-- [Animation Testing Guide](../animation-testing.md)
+### Accessibility Testing
+
+All components should test accessibility:
+
+```typescript
+describe("Accessibility", () => {
+  it("has the correct ARIA attributes", () => {
+    render(<Component aria-label="Test Label" />);
+    expect(screen.getByRole("button")).toHaveAttribute("aria-label", "Test Label");
+  });
+  
+  it("can be navigated with keyboard", async () => {
+    const user = userEvent.setup();
+    render(<Component />);
+    
+    // Tab to focus the component
+    await user.tab();
+    expect(screen.getByRole("button")).toHaveFocus();
+    
+    // Activate with keyboard
+    await user.keyboard("{enter}");
+    // Verify activation behavior
+  });
+});
+```
+
+### Styling and Variants
+
+For components with style variants:
+
+```typescript
+describe("Styling", () => {
+  it("applies the correct classes for each variant", () => {
+    render(<Component variant="primary" />);
+    expect(screen.getByRole("button")).toHaveClass("bg-primary text-white");
+    
+    cleanup();
+    
+    render(<Component variant="secondary" />);
+    expect(screen.getByRole("button")).toHaveClass("bg-secondary text-black");
+  });
+});
+```
+
+### Testing Composition
+
+For compound components:
+
+```typescript
+describe("Composition", () => {
+  it("correctly composes with other components", () => {
+    render(
+      <Component>
+        <Component.Item>Item 1</Component.Item>
+        <Component.Item>Item 2</Component.Item>
+      </Component>
+    );
+    
+    expect(screen.getByText("Item 1")).toBeInTheDocument();
+    expect(screen.getByText("Item 2")).toBeInTheDocument();
+  });
+});
+```
+
+## Common Testing Utilities
+
+### Custom Render Function
+
+Many tests use a custom render function from `__tests__/utils/test-utils.tsx` that provides additional context:
+
+```typescript
+import { render } from '@/__tests__/utils/test-utils';
+
+// In the test:
+render(<Component />, { 
+  theme: "dark",
+  withTooltipProvider: true 
+});
+```
+
+### Class Testing Utilities
+
+For testing Tailwind classes:
+
+```typescript
+import { hasClasses, compareClasses } from '@/__tests__/utils/test-utils';
+
+// In the test:
+const element = screen.getByRole("button");
+expect(hasClasses(element, "bg-primary", "text-white")).toBe(true);
+```
+
+### Mock Implementations
+
+Common mocks for complex components:
+
+```typescript
+// Mock Next.js components
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: (props) => <img {...props} data-testid="mock-image" />
+}));
+```
+
+## Directory Structure
+
+Tests are organized following the same structure as the component files:
+
+```
+__tests__/
+  components/
+    ui/
+      form/
+        button.test.tsx
+        checkbox.test.tsx
+      overlay/
+        dialog.test.tsx
+    sections/
+      hero.test.tsx
+```
+
+This makes it easy to find tests for a specific component and maintain consistency.
+
+## Testing Challenges
+
+### Testing Radix UI Components
+
+Radix UI components present challenges with their portal-based rendering and context providers. See specific component documentation for strategies.
+
+### Testing NextJS Components
+
+Next.js components often require specific mocks for features like routing and image optimization. Common patterns are documented in individual component files.
+
+### Testing Responsive Components
+
+Testing responsive behavior requires simulating different viewport sizes. See specific component documentation for examples of testing responsive designs.
+
+## Further Reading
+
+For more detailed information about testing practices, see:
+- [Component Testing Guidelines](../COMPONENT-TESTING.md)
+- [Testing Strategy](../TESTING-STRATEGY.md)
+- [Integration Testing](../INTEGRATION-TESTING.md)
 
 ## Component Test Coverage
 
@@ -191,4 +241,5 @@ Current component test coverage:
 | Toast     | 87%   | 85%        | 80%      | 90%       |
 | Header    | 100%  | 100%       | 100%     | 100%      |
 | Hero      | 100%  | 100%       | 100%     | 100%      |
-| About     | 100%  | 100%       | 100%     | 100%      | 
+| About     | 100%  | 100%       | 100%     | 100%      |
+| Featured Work Carousel | 100% | 100% | 100% | 100% | 

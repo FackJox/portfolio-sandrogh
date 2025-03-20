@@ -8,10 +8,10 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 
 | Metric | Current | Target | Status |
 |--------|---------|--------|--------|
-| Statements | 5.25% | 20% | ❌ Not Meeting Target |
-| Branches | 7.16% | 15% | ❌ Not Meeting Target |
-| Functions | 3.20% | 20% | ❌ Not Meeting Target |
-| Lines | 5.14% | 20% | ❌ Not Meeting Target |
+| Statements | 6.54% | 20% | ❌ Not Meeting Target |
+| Branches | 4.85% | 15% | ❌ Not Meeting Target |
+| Functions | 10.12% | 20% | ❌ Not Meeting Target |
+| Lines | 6.85% | 20% | ❌ Not Meeting Target |
 
 ## Coverage Distribution
 
@@ -26,6 +26,8 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 | components/ui/form/input-otp.tsx | 96.29% | 95.45% | 100% | 95.83% |
 | components/ui/theming/theme-provider.tsx | 100% | 0% | 100% | 100% |
 | components/sections/Hero.tsx | 100% | 100% | 100% | 100% |
+| components/sections/About.tsx | 100% | 100% | 100% | 100% |
+| components/sections/featured-work-carousel.tsx | 100% | 100% | 100% | 100% |
 
 ### Priority Areas For Improvement
 
@@ -36,12 +38,10 @@ This document tracks the test coverage progress for the Sandro Portfolio project
   * page.tsx
   
 * `components/sections/`:
-  * About.tsx
   * Contact.tsx
   * InstagramFeed.tsx
   * MediaCategories.tsx
   * Testimonials.tsx
-  * featured-work-carousel.tsx
   
 * `hooks/`:
   * use-mobile.tsx
@@ -57,7 +57,7 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 
 Based on the current coverage report, the following gaps have been identified:
 
-1. **Section Components**: Started adding coverage with Hero.tsx at 100%. Other section components still at 0% coverage. These components make up a significant portion of the application's UI and business logic.
+1. **Section Components**: Progress made with Hero.tsx, About.tsx, and featured-work-carousel.tsx at 100%. Other section components still at 0% coverage. These components make up a significant portion of the application's UI and business logic.
 
 2. **Hooks**: 0% coverage for all custom hooks. Hooks contain critical business logic and should be thoroughly tested.
 
@@ -76,7 +76,8 @@ Based on the current coverage report, the following gaps have been identified:
 
 | Date | Statements | Branches | Functions | Lines | Notes |
 |------|------------|----------|-----------|-------|-------|
-| Current | ~5.25% | ~7.16% | ~3.20% | ~5.14% | Added 100% test coverage for Hero component |
+| Current | ~6.54% | ~4.85% | ~10.12% | ~6.85% | Added 100% test coverage for Featured Work Carousel component |
+| Previous | ~5.25% | ~7.16% | ~3.20% | ~5.14% | Added 100% test coverage for Hero component |
 | Previous | 5.25% | 7.16% | 3.20% | 5.14% | Added comprehensive tests for Input component |
 | Initial | 4.82% | 7.16% | 2.56% | 4.69% | Initial measurement after setting new thresholds |
 

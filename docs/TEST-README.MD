@@ -43,6 +43,7 @@ Special patterns for testing specific component types:
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility
 - [Hero Component Testing](testing/components/hero.md) - Comprehensive testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
 - [About Component Testing](testing/components/about.md) - Testing of the About section component including section title, biography text, portrait image, client logo grid, responsive layout, and accessibility
+- [Featured Work Carousel Component Testing](testing/components/featured-work-carousel.md) - Comprehensive testing of the Featured Work Carousel component covering initial rendering, carousel navigation, item rendering, touch interactions, keyboard accessibility, screen reader accessibility, and responsive behavior
 
 ### Integration Testing
 
@@ -187,6 +188,7 @@ Coverage reports are generated automatically when running tests.
 - `components/ui/theming/theme-provider.tsx`: 100% coverage
 - `components/sections/Hero.tsx`: 100% coverage
 - `components/sections/About.tsx`: 100% coverage
+- `components/sections/featured-work-carousel.tsx`: 100% coverage
 - `components/ui/form/form.tsx`: 95.45% with only 2 uncovered lines
 - `components/ui/overlay/dialog.tsx`: 91.66% lines
 - `components/ui/overlay/dropdown-menu.tsx`: 100% coverage
@@ -243,11 +245,9 @@ The following components have excellent test coverage (100%):
 - `components/layout/Header.tsx`
 - `components/sections/Hero.tsx`
 - `components/sections/About.tsx`
+- `components/sections/featured-work-carousel.tsx`
 - `components/ui/form/checkbox.tsx`
 - `components/ui/form/form.tsx` (95.45% with only 2 uncovered lines)
 - `components/ui/form/input.tsx` (100% on all metrics)
 - `components/ui/form/textarea.tsx` (100% on all metrics)
 - `components/ui/form/input-otp.tsx` (95.83% lines)
-- `components/ui/form/select.tsx` (79.16% lines)
-- `components/ui/overlay/dialog.tsx` (91.66% lines)
-- `components/ui/overlay/dropdown-menu.tsx` (100% coverage)
