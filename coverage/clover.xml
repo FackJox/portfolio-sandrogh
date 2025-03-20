@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1742493663790" clover="3.2.0">
-  <project timestamp="1742493663790" name="All files">
-    <metrics statements="1108" coveredstatements="20" conditionals="335" coveredconditionals="0" methods="156" coveredmethods="2" elements="1599" coveredelements="22" complexity="0" loc="1108" ncloc="1108" packages="16" files="69" classes="69"/>
+<coverage generated="1742494207477" clover="3.2.0">
+  <project timestamp="1742494207477" name="All files">
+    <metrics statements="1108" coveredstatements="23" conditionals="335" coveredconditionals="5" methods="156" coveredmethods="1" elements="1599" coveredelements="29" complexity="0" loc="1108" ncloc="1108" packages="16" files="69" classes="69"/>
     <package name="app">
       <metrics statements="15" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="layout.tsx" path="/home/jack/Projects/dev/sandro-portfolio/app/layout.tsx">
@@ -406,7 +406,7 @@
       </file>
     </package>
     <package name="components.ui.form">
-      <metrics statements="160" coveredstatements="6" conditionals="42" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <metrics statements="160" coveredstatements="19" conditionals="42" coveredconditionals="5" methods="14" coveredmethods="0"/>
       <file name="button.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/button.tsx">
         <metrics statements="9" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -420,13 +420,13 @@
         <line num="56" count="0" type="stmt"/>
       </file>
       <file name="checkbox.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/checkbox.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="30" count="20" type="stmt"/>
+        <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
       </file>
       <file name="form.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/form.tsx">
         <metrics statements="44" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
@@ -533,28 +533,28 @@
         <line num="44" count="0" type="stmt"/>
       </file>
       <file name="select.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/select.tsx">
-        <metrics statements="24" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
+        <metrics statements="24" coveredstatements="19" conditionals="5" coveredconditionals="5" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="150" count="8" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="153" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
+        <line num="152" count="8" type="stmt"/>
+        <line num="153" count="8" type="stmt"/>
+        <line num="154" count="8" type="stmt"/>
         <line num="155" count="0" type="stmt"/>
-        <line num="156" count="0" type="stmt"/>
+        <line num="156" count="10" type="stmt"/>
         <line num="157" count="0" type="stmt"/>
         <line num="158" count="0" type="stmt"/>
         <line num="159" count="0" type="stmt"/>
@@ -965,7 +965,7 @@
       </file>
     </package>
     <package name="components.ui.overlay">
-      <metrics statements="215" coveredstatements="7" conditionals="20" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="215" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="alert-dialog.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/overlay/alert-dialog.tsx">
         <metrics statements="26" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
@@ -1201,24 +1201,24 @@
         <line num="139" count="0" type="stmt"/>
       </file>
       <file name="tooltip.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/overlay/tooltip.tsx">
-        <metrics statements="8" coveredstatements="7" conditionals="1" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
+        <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
       </file>
     </package>
     <package name="components.ui.theming">
-      <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="3" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="theme-provider.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/theming/theme-provider.tsx">
-        <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="13" count="20" type="stmt"/>
+        <metrics statements="3" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
       </file>
     </package>
     <package name="components.ui.util">
@@ -1361,8 +1361,8 @@
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="4" count="44" type="stmt"/>
-        <line num="5" count="44" type="stmt"/>
+        <line num="4" count="50" type="stmt"/>
+        <line num="5" count="50" type="stmt"/>
       </file>
     </package>
   </project>
