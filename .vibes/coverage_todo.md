@@ -24,7 +24,7 @@ vibes
 - [x] Implement Dropdown Menu Component Tests
 
 ## Phase 4: Section Components
-- [ ] Implement Hero Section Tests
+- [x] Implement Hero Section Tests
 - [ ] Implement Featured Work Carousel Tests
 - [ ] Implement Contact Section Tests
 

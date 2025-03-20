@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.92% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/27</span>
+                <span class='fraction'>12/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>6/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28% </span>
+                <span class="strong">48% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/25</span>
+                <span class='fraction'>12/25</span>
             </div>
         
             
@@ -256,14 +256,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -338,7 +338,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -383,25 +383,25 @@ export interface ButtonProps
 }
 &nbsp;
 const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
-<span class="fstat-no" title="function not covered" >  ({ </span>
+  ({ 
     className, 
     variant, 
     size, 
     asChild = <span class="branch-0 cbranch-no" title="branch not covered" >false, </span>
-    isLoading = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span>
-    iconPosition = <span class="branch-0 cbranch-no" title="branch not covered" >"left",</span>
+    isLoading = false,
+    iconPosition = "left",
     children,
     disabled,
     ...props 
   }, ref) =&gt; {
-    const Comp = <span class="cstat-no" title="statement not covered" >asChild ? Slot : "button"</span>
-    const isDisabled = <span class="cstat-no" title="statement not covered" >disabled || isLoading;</span>
+    const Comp = asChild ? Slot : <span class="branch-1 cbranch-no" title="branch not covered" >"button"</span>
+    const isDisabled = disabled || isLoading;
     
     // Handle children based on asChild
-    let childContent = <span class="cstat-no" title="statement not covered" >children;</span>
+    let childContent = children;
     
     // Only manipulate children if not using asChild
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!asChild) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!asChild) {
       let childrenArray = <span class="cstat-no" title="statement not covered" >React.Children.toArray(children);</span>
       
       // If there's an icon (SVG element) and other content
@@ -466,7 +466,7 @@ const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         disabled={isDisabled}
-        aria-disabled={isDisabled ? true : undefined}
+        aria-disabled={isDisabled ? <span class="branch-0 cbranch-no" title="branch not covered" >true : u</span>ndefined}
         {...props}
       &gt;
         {childContent}
@@ -476,7 +476,7 @@ const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
 )
 Button.displayName = "Button"
 &nbsp;
-export { <span class="cstat-no" title="statement not covered" >Button,</span> <span class="cstat-no" title="statement not covered" >buttonVariants </span>}
+export { Button, <span class="cstat-no" title="statement not covered" >buttonVariants </span>}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -484,7 +484,7 @@ export { <span class="cstat-no" title="statement not covered" >Button,</span> <s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-20T22:13:35.074Z
+                at 2025-03-20T22:19:23.123Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
