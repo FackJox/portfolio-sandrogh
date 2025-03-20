@@ -41,7 +41,7 @@ Special patterns for testing specific component types:
 - [Toast Component Testing](testing/components/toast.md) - Comprehensive testing of the Toast notification system covering toast component, toaster queue management, animations, accessibility, and useToast hook
 - [Form Component Testing](testing/components/form.md) - Comprehensive testing of the Form component orchestrating form state management, validation, submission, reset functionality, accessibility, and integration with other form components
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility
-- [Hero Component Testing](testing/components/hero.md) - Testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
+- [Hero Component Testing](testing/components/hero.md) - Comprehensive testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
 - [About Component Testing](testing/components/about.md) - Testing of the About section component including section title, biography text, portrait image, client logo grid, responsive layout, and accessibility
 
 ### Integration Testing

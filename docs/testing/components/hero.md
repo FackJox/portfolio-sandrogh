@@ -24,6 +24,8 @@ The Hero component tests focus on both content and presentation aspects:
 | Responsive layout | ✅ | Complete |
 | Styling & overlay | ✅ | Complete |
 | Accessibility | ✅ | Complete |
+| User interaction | ✅ | Complete |
+| Keyboard navigation | ✅ | Complete |
 
 ## Test Implementation
 
@@ -53,12 +55,19 @@ The Hero component test file (`/components/sections/Hero.test.tsx`) uses Jest an
 - **Link Accessibility**: Tests that links have meaningful text content
 - **Semantic HTML**: Ensures proper semantic structure with section element
 
+### User Interaction Tests
+
+- **Button Click Handling**: Tests that buttons are clickable and maintain their href attributes
+- **Focus Management**: Tests keyboard navigation between interactive elements
+- **Tabbing Order**: Ensures proper tab order for keyboard users
+
 ## Mock Implementation
 
-The tests include mocks for two Next.js components:
+The tests include mocks for Next.js components:
 
 1. **next/image**: Mocked to return a standard img element with data attributes for testing
 2. **next/link**: Mocked to render an anchor element with the href prop
+3. **next/navigation**: Mocked useRouter with push function for interaction testing
 
 ## Example Test Cases
 
@@ -91,23 +100,29 @@ it("has a responsive layout structure", () => {
   expect(buttonContainer).toHaveClass("flex flex-col sm:flex-row")
 })
 
-// Accessibility test
-it("meets accessibility requirements", () => {
-  // Test image has alt text
-  expect(screen.getByAltText("Action photography hero image")).toBeInTheDocument()
+// User interaction test
+it("allows users to interact with the STILLS button", async () => {
+  const user = userEvent.setup()
+  const stillsButton = screen.getByRole("link", { name: /STILLS/i })
   
-  // Test heading structure
-  expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument()
+  await user.click(stillsButton)
+  // Since we're using Next.js Link, we can verify the href attribute is correct
+  expect(stillsButton).toHaveAttribute("href", "/portfolio?filter=stills")
+})
+
+// Keyboard navigation test
+it("maintains proper focus management for keyboard navigation", async () => {
+  const user = userEvent.setup()
+  const stillsButton = screen.getByRole("link", { name: /STILLS/i })
+  const motionButton = screen.getByRole("link", { name: /MOTION/i })
   
-  // Test links have proper text
-  const links = screen.getAllByRole("link")
-  links.forEach(link => {
-    expect(link).toHaveTextContent(/STILLS|MOTION/)
-  })
+  // First set focus on the first button
+  stillsButton.focus()
+  expect(document.activeElement).toBe(stillsButton)
   
-  // Test semantic structure - section element for the hero
-  const section = document.querySelector("section")
-  expect(section).toBeInTheDocument()
+  // Then tab to the next button
+  await user.tab()
+  expect(document.activeElement).toBe(motionButton)
 })
 ```
 
@@ -118,9 +133,11 @@ it("meets accessibility requirements", () => {
 - Responsive layout testing verifies proper class application rather than actual rendering at different screen sizes
 - Accessibility testing ensures proper semantic structure and meaningful content
 - For elements without ARIA roles (like section), direct DOM querying with document.querySelector is used instead of screen.getByRole
+- User interaction testing uses React Testing Library's userEvent for simulating real user actions
+- Keyboard navigation testing ensures the component is accessible to keyboard-only users
 
 ## Future Improvements
 
-- Addition of user interaction tests for the CTA buttons
 - Visual regression testing for responsive layouts
 - Performance testing for image loading (particularly with the priority attribute)
+- Testing animation effects on scroll or view transitions

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { Hero } from "./Hero"
 
 // Mock next/image because it's not available in the test environment
@@ -17,9 +18,19 @@ jest.mock("next/link", () => ({
   },
 }))
 
+// Mock useRouter for interaction testing
+const mockPush = jest.fn()
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}))
+
 describe("Hero", () => {
   beforeEach(() => {
     render(<Hero />)
+    // Reset mocks
+    mockPush.mockReset()
   })
 
   it("renders the main headline text", () => {
@@ -82,5 +93,38 @@ describe("Hero", () => {
     // Test semantic structure - section element for the hero
     const section = document.querySelector("section")
     expect(section).toBeInTheDocument()
+  })
+  
+  // New tests for user interaction
+  it("allows users to interact with the STILLS button", async () => {
+    const user = userEvent.setup()
+    const stillsButton = screen.getByRole("link", { name: /STILLS/i })
+    
+    await user.click(stillsButton)
+    // Since we're using Next.js Link, we can verify the href attribute is correct
+    expect(stillsButton).toHaveAttribute("href", "/portfolio?filter=stills")
+  })
+  
+  it("allows users to interact with the MOTION button", async () => {
+    const user = userEvent.setup()
+    const motionButton = screen.getByRole("link", { name: /MOTION/i })
+    
+    await user.click(motionButton)
+    // Since we're using Next.js Link, we can verify the href attribute is correct
+    expect(motionButton).toHaveAttribute("href", "/portfolio?filter=motion")
+  })
+  
+  it("maintains proper focus management for keyboard navigation", async () => {
+    const user = userEvent.setup()
+    const stillsButton = screen.getByRole("link", { name: /STILLS/i })
+    const motionButton = screen.getByRole("link", { name: /MOTION/i })
+    
+    // First set focus on the first button
+    stillsButton.focus()
+    expect(document.activeElement).toBe(stillsButton)
+    
+    // Then tab to the next button
+    await user.tab()
+    expect(document.activeElement).toBe(motionButton)
   })
 }) 
