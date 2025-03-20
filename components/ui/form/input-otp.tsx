@@ -35,7 +35,27 @@ const InputOTPSlot = React.forwardRef<
   React.ComponentPropsWithoutRef<"div"> & { index: number }
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
+  
+  // Add validation checks
+  const isContextValid = !!inputOTPContext
+  const areSlotsValid = isContextValid && Array.isArray(inputOTPContext.slots)
+  const isIndexValid = areSlotsValid && index >= 0 && index < inputOTPContext.slots.length
+  
+  // Provide fallback values when validation fails
+  const char = isIndexValid ? inputOTPContext.slots[index].char : ""
+  const hasFakeCaret = isIndexValid ? inputOTPContext.slots[index].hasFakeCaret : false
+  const isActive = isIndexValid ? inputOTPContext.slots[index].isActive : false
+  
+  // Add console warnings in development mode
+  if (process.env.NODE_ENV === "development") {
+    if (!isContextValid) {
+      console.warn("InputOTPSlot: OTPInputContext is not available. Make sure to use this component inside an InputOTP component.")
+    } else if (!areSlotsValid) {
+      console.warn("InputOTPSlot: OTPInputContext.slots is not valid. Expected an array.")
+    } else if (!isIndexValid) {
+      console.warn(`InputOTPSlot: Invalid index ${index}. Must be between 0 and ${inputOTPContext.slots.length - 1}.`)
+    }
+  }
 
   return (
     <div
@@ -45,6 +65,10 @@ const InputOTPSlot = React.forwardRef<
         isActive && "z-10 ring-2 ring-ring ring-offset-background",
         className
       )}
+      role="textbox"
+      aria-live="polite"
+      aria-label={`Digit ${index + 1}`}
+      aria-current={isActive ? "step" : undefined}
       {...props}
     >
       {char}

@@ -6,6 +6,22 @@ import {
   type ThemeProviderProps,
 } from 'next-themes'
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+interface ExtendedThemeProviderProps extends ThemeProviderProps {
+  disableScript?: boolean
+}
+
+export function ThemeProvider({ 
+  children, 
+  disableScript = false, 
+  ...props 
+}: ExtendedThemeProviderProps) {
+  return (
+    <NextThemesProvider 
+      {...props}
+      // Use disableScript to prevent theme script injection in tests
+      enableScript={!disableScript}
+    >
+      {children}
+    </NextThemesProvider>
+  )
 }
