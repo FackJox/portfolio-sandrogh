@@ -471,6 +471,87 @@ function createDialogTester(
 }
 
 /**
+ * Enhanced tester for Radix UI Popover components
+ */
+interface RadixPopoverTester extends RadixComponentTester {
+  closeWithEscape: () => Promise<void>
+  closeWithOutsideClick: () => Promise<void>
+  checkAlignment: (alignment: "start" | "center" | "end") => boolean
+  getAlignment: () => string | null
+}
+
+/**
+ * Creates an enhanced tester specifically for Radix UI Popover components
+ * 
+ * @param result - RenderResult from rendering the component
+ * @param triggerSelector - CSS selector for the trigger element (defaults to standard Radix selector)
+ * @param contentSelector - CSS selector for the content element (defaults to standard Radix selector)
+ * @param openState - Value of data-state when open
+ * @param closedState - Value of data-state when closed
+ * @returns RadixPopoverTester
+ */
+function createPopoverTester(
+  result: RenderResult,
+  triggerSelector: string = '[data-radix-popover-trigger]',
+  contentSelector: string = '[data-radix-popover-content]',
+  openState: string = "open",
+  closedState: string = "closed"
+): RadixPopoverTester {
+  const baseTester = createRadixTester(
+    result,
+    triggerSelector,
+    contentSelector,
+    openState,
+    closedState
+  )
+  
+  const closeWithEscape = async () => {
+    const content = baseTester.getContent()
+    if (!content) throw new Error(`Content element not found: ${contentSelector}`)
+    
+    userEvent.keyboard("{Escape}")
+    
+    await waitFor(() => {
+      if (baseTester.isOpen())
+        throw new Error("Popover did not close with escape key")
+    })
+  }
+  
+  const closeWithOutsideClick = async () => {
+    const content = baseTester.getContent()
+    if (!content) throw new Error(`Content element not found: ${contentSelector}`)
+    
+    // Click outside the popover
+    document.body.click()
+    
+    await waitFor(() => {
+      if (baseTester.isOpen())
+        throw new Error("Popover did not close with outside click")
+    })
+  }
+  
+  const checkAlignment = (alignment: "start" | "center" | "end"): boolean => {
+    const content = baseTester.getContent()
+    if (!content) return false
+    return content.getAttribute('data-align') === alignment
+  }
+  
+  const getAlignment = (): string | null => {
+    const content = baseTester.getContent()
+    if (!content) return null
+    return content.getAttribute('data-align')
+  }
+  
+  return {
+    ...baseTester,
+    closeWithEscape,
+    closeWithOutsideClick,
+    checkAlignment,
+    getAlignment
+  }
+}
+
+/**
  * Mock functions for common browser operations
  */
 const mockWindowResize = (width: number, height: number): void => {
@@ -921,6 +1002,7 @@ export {
   renderWithForm,
   createRadixTester,
   createDialogTester,
+  createPopoverTester,
   mockWindowResize,
   mockNavigation,
   setupUserEvent,

@@ -46,6 +46,7 @@ Our testing utilities are designed to make component testing easier and more rob
 
 - `createRadixTester`: Creates a tester for any Radix UI component
 - `createDialogTester`: Specialized tester for Radix UI Dialog components
+- `createPopoverTester`: Specialized tester for Radix UI Popover components with positioning and alignment testing
 
 ### Form Testing
 
@@ -137,6 +138,15 @@ For detailed documentation of all testing utilities, see:
 
 - [Testing Utilities Documentation](utils/README.md) - Comprehensive documentation of all utilities
 - [Tailwind Class Testing](utils/cn-utility.md) - Tailwind-specific utilities
+
+## Component Test Documentation
+
+The following components have detailed test documentation:
+
+- [Dialog Component Testing](components/dialog.md) - Testing strategy for Dialog component
+- [Popover Component Testing](components/popover.md) - Testing strategy for Popover component
+
+These documents outline the specific test cases, challenges, and approaches used for testing each component.
 
 ## Contribution Guidelines
 
