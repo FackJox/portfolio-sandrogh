@@ -15,7 +15,7 @@ vibes
 - [x] Implement Form Component Tests
 
 ## Phase 2: UI Utility Components
-- [ ] Implement Button Component Tests
+- [x] Implement Button Component Tests
 - [ ] Implement Toast Component Tests
 
 ## Phase 3: Overlay Components
