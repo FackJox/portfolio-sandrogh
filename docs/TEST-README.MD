@@ -219,10 +219,10 @@ When writing tests, follow these principles:
 ## Current Coverage Status
 
 As of the latest test run, the project has the following coverage metrics:
-- **Statements**: 6.29% (Target: 40%)
+- **Statements**: 6.72% (Target: 40%)
 - **Branches**: 7.16% (Target: 30%)
-- **Functions**: 5.76% (Target: 40%)
-- **Lines**: 6.22% (Target: 40%)
+- **Functions**: 6.41% (Target: 40%)
+- **Lines**: 6.67% (Target: 40%)
 
 ## Well-Tested Components
 
@@ -233,7 +233,8 @@ The following components have excellent test coverage (100%):
 - `components/sections/About.tsx`
 - `components/ui/form/button.tsx`
 - `components/ui/form/checkbox.tsx`
-- `components/ui/form/input.tsx`
+- `components/ui/form/input.tsx` (100% on all metrics)
+- `components/ui/form/textarea.tsx` (100% on all metrics)
 - `components/ui/form/input-otp.tsx` (95.83% lines)
 
 ## Critical Coverage Gaps
