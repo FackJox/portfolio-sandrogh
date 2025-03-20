@@ -213,67 +213,393 @@ Test component behavior in edge cases:
 3. Test overflow handling
 4. Test error states
 
-## Testing Radix UI Components
+## Testing Specific Component Types
 
-Components built with Radix UI primitives require special consideration:
+### Testing Radix UI Components with Proper Context
 
-1. Test with the custom render function that includes providers
-2. Test component composition (Root, Trigger, Content, etc.)
-3. Verify state changes based on Radix's data attributes
-4. Test proper context integration
+Radix UI components often require specific context providers and handle complex state management. When testing these components:
+
+1. Use the custom render function with appropriate providers
+2. Test state transitions using data attributes
+3. Use the `createRadixTester` utility to simplify testing
+4. Focus on testing the component API, not the internal implementation
+
+Example:
+
+```tsx
+import { render, screen, createRadixTester } from '@/__tests__/utils/test-utils';
+import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
+
+describe('Dialog Component', () => {
+  it('renders closed by default', () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>Dialog Content</DialogContent>
+      </Dialog>
+    );
+    
+    expect(screen.getByRole('button', { name: /open dialog/i })).toBeInTheDocument();
+    expect(screen.queryByText('Dialog Content')).not.toBeInTheDocument();
+  });
+  
+  it('opens when trigger is clicked', async () => {
+    const { container } = render(
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>Dialog Content</DialogContent>
+      </Dialog>
+    );
+    
+    // Use the createRadixTester utility
+    const dialogTester = createRadixTester(
+      { container } as any,
+      '[role="button"]',
+      '[role="dialog"]'
+    );
+    
+    // Open dialog
+    await dialogTester.open();
+    expect(dialogTester.isOpen()).toBe(true);
+    expect(screen.getByText('Dialog Content')).toBeVisible();
+    
+    // Close dialog
+    await dialogTester.close();
+    expect(dialogTester.isOpen()).toBe(false);
+  });
+  
+  it('handles keyboard interactions', async () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>Dialog Content</DialogContent>
+      </Dialog>
+    );
+    
+    // Open dialog
+    const trigger = screen.getByRole('button', { name: /open dialog/i });
+    await userEvent.click(trigger);
+    
+    // Press Escape to close
+    await userEvent.keyboard('{Escape}');
+    expect(screen.queryByText('Dialog Content')).not.toBeInTheDocument();
+  });
+});
+```
+
+### Testing Components with forwardRef
+
+Components using `forwardRef` need testing to ensure the ref is properly forwarded:
+
+1. Create a ref using `React.createRef()`
+2. Pass the ref to the component
+3. Verify the ref is attached to the correct element
+4. Test with and without `asChild` prop if applicable
+
+Example:
+
+```tsx
+import * as React from 'react';
+import { render, screen } from '@/__tests__/utils/test-utils';
+import { Button } from '@/components/ui/button';
+
+describe('Button forwardRef', () => {
+  it('forwards ref to the button element', () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<Button ref={ref}>Button with Ref</Button>);
+    
+    expect(ref.current).not.toBeNull();
+    expect(ref.current?.tagName).toBe('BUTTON');
+    expect(ref.current?.textContent).toBe('Button with Ref');
+  });
+  
+  it('forwards ref when using asChild', () => {
+    const ref = React.createRef<HTMLAnchorElement>();
+    render(
+      <Button asChild>
+        <a ref={ref} href="https://example.com">Link Button</a>
+      </Button>
+    );
+    
+    expect(ref.current).not.toBeNull();
+    expect(ref.current?.tagName).toBe('A');
+    expect(ref.current?.href).toContain('example.com');
+    expect(ref.current?.textContent).toBe('Link Button');
+  });
+  
+  it('preserves component functionality with forwarded ref', async () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    const handleClick = jest.fn();
+    
+    render(<Button ref={ref} onClick={handleClick}>Clickable Button</Button>);
+    
+    // Can reference the DOM element via ref
+    expect(ref.current).toBeInTheDocument();
+    
+    // Element still functions normally
+    await userEvent.click(ref.current!);
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+```
+
+### Testing Components with Multiple Variants (cva)
+
+For components that use class-variance-authority (cva) for styling variants:
+
+1. Test each variant combination systematically
+2. Use the `hasClasses` or `compareClasses` utilities to verify class application
+3. Test default variants and explicit variants
+4. Reference the original `buttonVariants` (or similar) function for expected classes
+
+Example:
+
+```tsx
+import { render, screen, hasClasses } from '@/__tests__/utils/test-utils';
+import { Button, buttonVariants } from '@/components/ui/button';
+
+describe('Button Variants', () => {
+  it('applies default variant classes correctly', () => {
+    render(<Button>Default Button</Button>);
+    const button = screen.getByRole('button');
+    
+    // Use the buttonVariants function to get expected classes
+    const expectedClasses = buttonVariants({ variant: 'default', size: 'default' });
+    expect(hasClasses(button, expectedClasses)).toBe(true);
+  });
+  
+  it('applies specific variant classes correctly', () => {
+    const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
+    
+    // Test each variant
+    for (const variant of variants) {
+      const { rerender } = render(<Button variant={variant}>Button</Button>);
+      const button = screen.getByRole('button');
+      
+      // Get expected classes for this variant
+      const expectedClasses = buttonVariants({ variant, size: 'default' });
+      expect(hasClasses(button, expectedClasses)).toBe(true);
+      
+      // Cleanup between tests
+      rerender(<div />);
+    }
+  });
+  
+  it('applies size variant classes correctly', () => {
+    const sizes = ['default', 'sm', 'lg', 'icon'] as const;
+    
+    // Test each size
+    for (const size of sizes) {
+      const { rerender } = render(<Button size={size}>Button</Button>);
+      const button = screen.getByRole('button');
+      
+      // Get expected classes for this size
+      const expectedClasses = buttonVariants({ variant: 'default', size });
+      expect(hasClasses(button, expectedClasses)).toBe(true);
+      
+      // Cleanup between tests
+      rerender(<div />);
+    }
+  });
+  
+  it('combines variant and size classes correctly', () => {
+    render(<Button variant="outline" size="sm">Small Outline Button</Button>);
+    const button = screen.getByRole('button');
+    
+    const expectedClasses = buttonVariants({ variant: 'outline', size: 'sm' });
+    expect(hasClasses(button, expectedClasses)).toBe(true);
+  });
+  
+  it('combines custom className with variant classes', () => {
+    render(<Button className="my-custom-class">Custom Button</Button>);
+    const button = screen.getByRole('button');
+    
+    // Should have both variant classes and custom class
+    expect(button).toHaveClass('my-custom-class');
+    expect(hasClasses(button, buttonVariants())).toBe(true);
+  });
+});
+```
+
+### Testing Responsive Behaviors
+
+For components with responsive behavior:
+
+1. Use `mockWindowResize` to simulate different viewport sizes
+2. Test components at mobile, tablet, and desktop breakpoints
+3. Verify that the correct classes or styles are applied at each breakpoint
+4. Test interactive behavior that changes based on screen size (e.g., mobile menu)
+
+Example:
+
+```tsx
+import { render, screen, mockWindowResize } from '@/__tests__/utils/test-utils';
+import { Header } from '@/components/layout/Header';
+
+describe('Header Responsive Behavior', () => {
+  // Mock the necessary contexts and Next.js components
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  
+  it('displays desktop navigation on large screens', () => {
+    // Simulate desktop viewport
+    const cleanup = mockWindowResize(1280, 800);
+    
+    render(<Header />);
+    
+    // Desktop navigation should be visible
+    const desktopNav = screen.getByRole('navigation', { name: /main/i });
+    expect(desktopNav).toHaveClass('hidden md:flex');
+    expect(desktopNav).toBeVisible();
+    
+    // Mobile menu button should not be visible
+    expect(screen.queryByRole('button', { name: /menu/i })).toHaveClass('md:hidden');
+    
+    cleanup();
+  });
+  
+  it('displays mobile navigation on small screens', () => {
+    // Simulate mobile viewport
+    const cleanup = mockWindowResize(375, 667);
+    
+    render(<Header />);
+    
+    // Mobile menu button should be visible
+    const mobileMenuButton = screen.getByRole('button', { name: /menu/i });
+    expect(mobileMenuButton).toBeVisible();
+    
+    // Desktop navigation should be hidden
+    const desktopNav = screen.getByRole('navigation', { name: /main/i });
+    expect(desktopNav).toHaveClass('hidden md:flex');
+    expect(window.getComputedStyle(desktopNav).display).toBe('none');
+    
+    // Open mobile menu
+    userEvent.click(mobileMenuButton);
+    
+    // Mobile navigation should now be visible
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    
+    cleanup();
+  });
+  
+  it('transitions from mobile to desktop view correctly', () => {
+    // Start with mobile viewport
+    let cleanup = mockWindowResize(375, 667);
+    
+    const { rerender } = render(<Header />);
+    
+    // Mobile menu should be visible
+    expect(screen.getByRole('button', { name: /menu/i })).toBeVisible();
+    
+    // Change to desktop viewport
+    cleanup();
+    cleanup = mockWindowResize(1280, 800);
+    
+    // Force a re-render
+    rerender(<Header />);
+    
+    // Desktop navigation should now be visible
+    const desktopNav = screen.getByRole('navigation', { name: /main/i });
+    expect(desktopNav).toHaveClass('hidden md:flex');
+    expect(window.getComputedStyle(desktopNav).display).not.toBe('none');
+    
+    cleanup();
+  });
+});
+```
+
+### Testing Accessibility Features
+
+For ensuring components meet accessibility requirements:
+
+1. Test ARIA attributes and roles
+2. Test keyboard navigation and focus management
+3. Test screen reader text and announcements
+4. Verify color contrast (using specialized tools if needed)
 
 Example:
 
 ```tsx
 import { render, screen } from '@/__tests__/utils/test-utils';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import userEvent from '@testing-library/user-event';
+import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
 
-describe('Accordion Component', () => {
-  it('renders collapsed by default', () => {
+describe('Dialog Accessibility', () => {
+  it('has proper ARIA attributes', () => {
     render(
-      <Accordion type="single" collapsible>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Section 1</AccordionTrigger>
-          <AccordionContent>Content 1</AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent aria-label="Important information">
+          Dialog Content
+        </DialogContent>
+      </Dialog>
     );
     
-    expect(screen.getByRole('button')).toHaveAttribute('data-state', 'closed');
-    expect(screen.queryByText('Content 1')).not.toBeVisible();
-  });
-  
-  it('expands when trigger is clicked', async () => {
-    render(
-      <Accordion type="single" collapsible>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Section 1</AccordionTrigger>
-          <AccordionContent>Content 1</AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    );
-    
+    // Trigger should have aria-expanded="false" initially
     const trigger = screen.getByRole('button');
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    
+    // Click to open dialog
     userEvent.click(trigger);
     
-    // Wait for animation
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute('data-state', 'open');
-      expect(screen.getByText('Content 1')).toBeVisible();
-    });
+    // Dialog should have proper role and attributes
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toHaveAttribute('aria-modal', 'true');
+    expect(dialog).toHaveAttribute('aria-label', 'Important information');
+    
+    // Trigger should have aria-expanded="true" when open
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  });
+  
+  it('manages focus correctly', async () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>
+          <button>Focus Me</button>
+          <button>Another Button</button>
+        </DialogContent>
+      </Dialog>
+    );
+    
+    // Open dialog
+    await userEvent.click(screen.getByRole('button', { name: /open dialog/i }));
+    
+    // First focusable element should be focused automatically
+    const firstButton = screen.getByRole('button', { name: /focus me/i });
+    expect(document.activeElement).toBe(firstButton);
+    
+    // Tab should move to next focusable element within dialog
+    await userEvent.tab();
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: /another button/i }));
+    
+    // Tab again should keep focus within dialog (focus trap)
+    await userEvent.tab();
+    expect(document.activeElement).not.toBe(screen.getByRole('button', { name: /open dialog/i }));
+    expect(document.activeElement?.closest('[role="dialog"]')).toBeInTheDocument();
+  });
+  
+  it('closes with Escape key', async () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>Dialog Content</DialogContent>
+      </Dialog>
+    );
+    
+    // Open dialog
+    await userEvent.click(screen.getByRole('button', { name: /open dialog/i }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    
+    // Press Escape
+    await userEvent.keyboard('{Escape}');
+    
+    // Dialog should close
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 });
 ```
-
-## Testing Form Components
-
-For form components, consider these additional tests:
-
-1. Test validation behaviors
-2. Test form submission
-3. Test error states and messages
-4. Test integration with form libraries if applicable
-5. Test keyboard interactions specific to forms
 
 ## Best Practices
 
