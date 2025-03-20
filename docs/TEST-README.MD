@@ -36,6 +36,7 @@ Special patterns for testing specific component types:
 - [Input Component Testing](testing/components/input.md) - Complete testing of the Input component covering rendering, controlled input, disabled state, events, accessibility, and ref forwarding
 - [Textarea Component Testing](testing/components/textarea.md) - Thorough testing of the Textarea component covering rendering, controlled/uncontrolled input, resizing behavior, accessibility, form integration, and character limitations
 - [Select Component Testing](testing/components/select.md) - Testing of the Select component covering initial rendering, controlled behavior, accessibility, and testing challenges specific to Radix UI Select primitive
+- [Toast Component Testing](testing/components/toast.md) - Comprehensive testing of the Toast notification system covering toast component, toaster queue management, animations, accessibility, and useToast hook
 - [Form Component Testing](testing/components/form.md) - Comprehensive testing of the Form component orchestrating form state management, validation, submission, reset functionality, accessibility, and integration with other form components
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility
 - [Hero Component Testing](testing/components/hero.md) - Testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
