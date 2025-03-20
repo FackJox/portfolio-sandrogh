@@ -1,0 +1,81 @@
+# Sandro Portfolio - .cursorrules
+
+## Agent Behaviour
+1. Read @spec.md and @docs/ first to understand the portfolio website's specifications, data models, and component structure
+2. ALWAYS start each response with "vibes"
+3. Refer to me as Jack
+4. I am using fish shell, ensure all terminal commands are compatible with fish
+5. Add new Test Documentation to docs/ in the relevant section, use TEST-README.MD as the index for the testing documentation.
+6. Update existing Test Documentation in docs/ in the relevant section, use TEST-README.MD as the index for the testing documentation.
+7. NEVER add or update documentation until the code and tests are implemented correctly and all of the tests pass
+8. ALWAYS fix the root cause of bugs, don't be lazy and use workarounds
+
+## Code Quality
+1. MAINTAIN consistent component structure with Radix UI primitives and forwardRef pattern
+2. USE proper TypeScript types for all components and props
+3. IMPLEMENT single responsibility for each component - each React component should do one thing well
+4. ADD proper displayName to all components, especially for Radix UI components
+5. FOLLOW established patterns for component composition
+6. ENFORCE consistent code style seen throughout the components
+7. UTILIZE the cn() utility for combining Tailwind classes
+
+## Project Structure
+1. ORGANIZE UI components in the components/ui directory
+2. FOLLOW Next.js app router structure
+3. MAINTAIN separation of concerns between UI components and application logic
+4. IMPLEMENT consistent file naming patterns (kebab-case.tsx)
+5. PRESERVE the component structure pattern established in the project
+
+## Component Architecture
+1. BASE components on Radix UI primitives where appropriate
+2. IMPLEMENT forwardRef for all components that need ref forwarding
+3. USE consistent component composition pattern (Root, Trigger, Content, etc.)
+4. MAINTAIN proper displayName attributes for all components
+5. FOLLOW the established pattern of exporting individual component parts
+6. ENSURE logical component composition with clear parent-child relationships
+
+## UI Components Implementation
+1. USE class-variance-authority (cva) for defining component variants
+2. MAINTAIN consistent variant patterns across components (variant, size, etc.)
+3. PRESERVE accessibility features of Radix UI components
+4. FOLLOW established className patterns for styling components
+5. IMPLEMENT consistent animation classes for interactive components
+6. ENSURE responsive and accessible designs for all components
+7. USE consistent transition effects for state changes (data-state attributes)
+
+## Styling Approach
+1. USE Tailwind CSS utility classes for all styling
+2. IMPLEMENT the cn() utility for combining classes and conditionals
+3. MAINTAIN consistent use of HSL color variables via CSS custom properties
+4. FOLLOW established pattern for component variants using cva
+5. PRESERVE the design system's colors, typography, and spacing
+6. IMPLEMENT animations using the existing keyframes defined in tailwind.config.js
+7. USE consistent naming for state-based classes (data-[state=x])
+
+## Accessibility
+1. MAINTAIN all ARIA attributes in Radix UI components
+2. ENSURE proper keyboard navigation and focus management
+3. IMPLEMENT proper focus-visible styles for all interactive elements
+4. PRESERVE role attributes and accessibility features
+5. FOLLOW established patterns for accessible state management
+6. ENSURE all interactive components have proper focus handling
+
+## TypeScript Implementation
+1. USE explicit interface definitions for component props
+2. EXTEND React.HTMLAttributes or ComponentPropsWithoutRef where appropriate
+3. IMPLEMENT proper type definitions for forwarded refs
+4. USE VariantProps from class-variance-authority for variant typing
+5. MAINTAIN consistent typing patterns across components
+6. ENSURE type safety for all components and their props
+
+## Code Review Checklist
+- Does the component follow the established Radix UI + forwardRef pattern?
+- Are all props properly typed with TypeScript?
+- Does the component use the cn() utility consistently?
+- Are variants implemented using class-variance-authority?
+- Does the component maintain proper accessibility attributes?
+- Is the component properly exported with a displayName?
+- Does the styling follow the design system's patterns?
+- Are animations consistent with other components?
+- Is proper error handling implemented where needed?
+- Does the component composition follow established patterns?
