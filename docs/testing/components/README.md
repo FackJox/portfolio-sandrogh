@@ -12,10 +12,17 @@ The following components have comprehensive test coverage:
 
 1. [Button Component](button.md) - Testing various variants, sizes, events, and accessibility
 2. [Input Component](input.md) - Testing rendering, controlled input, disabled state, events, accessibility, and ref forwarding
+3. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
 
 ### Recent Additions
 
-The Input component tests were recently added, achieving 100% code coverage across all metrics:
+The Header component tests were recently added, testing both structure and behavior:
+- Tests navigation links and routing
+- Tests responsive mobile navigation with Sheet component
+- Verifies accessibility features and proper ARIA attributes
+- Tests styling and layout using Tailwind classes
+
+The Input component tests were previously added, achieving 100% code coverage across all metrics:
 - **Statements**: 100%
 - **Branches**: 100%
 - **Functions**: 100%

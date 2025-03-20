@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1742484478435" clover="3.2.0">
-  <project timestamp="1742484478435" name="All files">
-    <metrics statements="1108" coveredstatements="57" conditionals="335" coveredconditionals="24" methods="156" coveredmethods="5" elements="1599" coveredelements="86" complexity="0" loc="1108" ncloc="1108" packages="16" files="69" classes="69"/>
+<coverage generated="1742484925471" clover="3.2.0">
+  <project timestamp="1742484925471" name="All files">
+    <metrics statements="1108" coveredstatements="62" conditionals="335" coveredconditionals="24" methods="156" coveredmethods="6" elements="1599" coveredelements="92" complexity="0" loc="1108" ncloc="1108" packages="16" files="69" classes="69"/>
     <package name="app">
       <metrics statements="15" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="layout.tsx" path="/home/jack/Projects/dev/sandro-portfolio/app/layout.tsx">
@@ -54,7 +54,7 @@
       </file>
     </package>
     <package name="components.layout">
-      <metrics statements="9" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="9" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="Footer.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/layout/Footer.tsx">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -63,12 +63,12 @@
         <line num="5" count="0" type="stmt"/>
       </file>
       <file name="Header.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/layout/Header.tsx">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
       </file>
     </package>
     <package name="components.sections">
@@ -409,15 +409,15 @@
       <metrics statements="160" coveredstatements="43" conditionals="42" coveredconditionals="24" methods="14" coveredmethods="3"/>
       <file name="button.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/button.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="44" count="21" type="cond" truecount="2" falsecount="0"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="56" count="21" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="44" count="45" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="56" count="45" type="stmt"/>
       </file>
       <file name="checkbox.tsx" path="/home/jack/Projects/dev/sandro-portfolio/components/ui/form/checkbox.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -1359,10 +1359,10 @@
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="utils.ts" path="/home/jack/Projects/dev/sandro-portfolio/lib/utils.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="7" type="stmt"/>
-        <line num="2" count="7" type="stmt"/>
-        <line num="4" count="123" type="stmt"/>
-        <line num="5" count="123" type="stmt"/>
+        <line num="1" count="8" type="stmt"/>
+        <line num="2" count="8" type="stmt"/>
+        <line num="4" count="147" type="stmt"/>
+        <line num="5" count="147" type="stmt"/>
       </file>
     </package>
   </project>
