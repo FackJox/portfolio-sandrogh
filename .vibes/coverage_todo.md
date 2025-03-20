@@ -21,7 +21,7 @@ vibes
 ## Phase 3: Overlay Components
 - [x] Implement Dialog Component Tests
 - [x] Implement Popover Component Tests
-- [ ] Implement Dropdown Menu Component Tests
+- [x] Implement Dropdown Menu Component Tests
 
 ## Phase 4: Section Components
 - [ ] Implement Hero Section Tests
