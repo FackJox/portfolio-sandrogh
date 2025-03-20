@@ -16,6 +16,7 @@ The following components have comprehensive test coverage:
 4. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
 5. [Hero Section Component](hero.md) - Testing headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
 6. [About Section Component](about.md) - Testing section title, biography text, image rendering, client logo grid, responsive layout, and accessibility
+7. [Dialog Component](dialog.md) - Testing component rendering, accessibility, and interaction
 
 ### Recent Additions
 
@@ -156,6 +157,7 @@ The following components now have complete test coverage:
 - InputOTP: ~96%
 - Hero Section: 100%
 - About Section: 100%
+- Dialog: 92%
 
 We have continued testing section components with About.tsx, achieving 100% coverage.
 
@@ -164,3 +166,29 @@ Our next focus areas include:
 - Form component
 - Select component
 - Textarea component 
+
+## Additional Resources
+
+For more detailed information about testing specific component types, refer to:
+
+- [Form Component Testing Guide](../form-testing.md)
+- [Accessibility Testing Guide](../accessibility-testing.md)
+- [Animation Testing Guide](../animation-testing.md)
+
+## Component Test Coverage
+
+Current component test coverage:
+
+| Component | Lines | Statements | Branches | Functions |
+|-----------|-------|------------|----------|-----------|
+| Button    | 100%  | 100%       | 100%     | 100%      |
+| Checkbox  | 100%  | 100%       | 100%     | 100%      |
+| Input     | 100%  | 100%       | 100%     | 100%      |
+| Textarea  | 100%  | 100%       | 100%     | 100%      |
+| Select    | 79%   | 81%        | 75%      | 80%       |
+| Form      | 95%   | 94%        | 93%      | 96%       |
+| Dialog    | 92%   | 92%        | 100%     | 100%      |
+| Toast     | 87%   | 85%        | 80%      | 90%       |
+| Header    | 100%  | 100%       | 100%     | 100%      |
+| Hero      | 100%  | 100%       | 100%     | 100%      |
+| About     | 100%  | 100%       | 100%     | 100%      | 

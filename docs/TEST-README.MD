@@ -33,6 +33,7 @@ Special patterns for testing specific component types:
 
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, loading states, disabled state behavior, keyboard interaction, focus styles, accessibility features, event handlers, and rendering as different HTML elements
 - [Checkbox Component Testing](testing/components/checkbox.md) - Complete testing of the Checkbox component covering rendering, state management, keyboard interactions, accessibility, and form integration
+- [Dialog Component Testing](testing/components/dialog.md) - Complete testing of the Dialog component covering rendering, opening/closing behavior, keyboard interactions, focus management, accessibility, form integration, and portal rendering
 - [Input Component Testing](testing/components/input.md) - Complete testing of the Input component covering rendering, controlled input, disabled state, events, accessibility, and ref forwarding
 - [Textarea Component Testing](testing/components/textarea.md) - Thorough testing of the Textarea component covering rendering, controlled/uncontrolled input, resizing behavior, accessibility, form integration, and character limitations
 - [Select Component Testing](testing/components/select.md) - Testing of the Select component covering initial rendering, controlled behavior, accessibility, and testing challenges specific to Radix UI Select primitive
@@ -246,6 +247,7 @@ The following components have excellent test coverage (100%):
 - `components/ui/form/textarea.tsx` (100% on all metrics)
 - `components/ui/form/input-otp.tsx` (95.83% lines)
 - `components/ui/form/select.tsx` (79.16% lines)
+- `components/ui/overlay/dialog.tsx` (91.66% lines)
 
 ## Critical Coverage Gaps
 
