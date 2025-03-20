@@ -9,7 +9,7 @@ vibes
 
 ## Phase 1: Form Components
 - [x] Implement Input Component Tests
-- [ ] Expand Textarea Component Tests
+- [x] Expand Textarea Component Tests
 - [ ] Implement Checkbox Component Tests
 - [ ] Implement Select Component Tests
 - [ ] Implement Form Component Tests

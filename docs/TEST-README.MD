@@ -33,6 +33,7 @@ Special patterns for testing specific component types:
 
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, events, accessibility, and ref forwarding
 - [Input Component Testing](testing/components/input.md) - Complete testing of the Input component covering rendering, controlled input, disabled state, events, accessibility, and ref forwarding
+- [Textarea Component Testing](testing/components/textarea.md) - Thorough testing of the Textarea component covering rendering, controlled/uncontrolled input, resizing behavior, accessibility, form integration, and character limitations
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility
 - [Hero Component Testing](testing/components/hero.md) - Testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
 - [About Component Testing](testing/components/about.md) - Testing of the About section component including section title, biography text, portrait image, client logo grid, responsive layout, and accessibility
@@ -175,6 +176,7 @@ Coverage reports are generated automatically when running tests.
 - `components/ui/form/button.tsx`: 100% coverage
 - `components/ui/form/checkbox.tsx`: 100% coverage
 - `components/ui/form/input.tsx`: 100% coverage
+- `components/ui/form/textarea.tsx`: 100% coverage
 - `components/ui/form/input-otp.tsx`: ~96% coverage
 - `components/ui/theming/theme-provider.tsx`: 100% coverage
 - `components/sections/Hero.tsx`: 100% coverage
@@ -245,7 +247,6 @@ The following areas have the most critical coverage gaps:
 1. **Form components** - These are fundamental building blocks used throughout the application:
    - `components/ui/form/form.tsx` (0%)
    - `components/ui/form/select.tsx` (0%)
-   - `components/ui/form/textarea.tsx` (0%)
 
 2. **Overlay components** - Essential for user interaction:
    - `components/ui/overlay/dialog.tsx` (0%)
@@ -273,7 +274,6 @@ The following areas have the most critical coverage gaps:
 1. Create tests for most-used form components:
    - `form.tsx` - Test form validation, submission handling, and error display
    - `select.tsx` - Test selection functionality, keyboard navigation, and accessibility
-   - `textarea.tsx` - Test value changes, controlled behavior, and styling variants
 
 2. Add tests for critical overlay components:
    - `dialog.tsx` - Test opening/closing, focus management, and accessibility
@@ -310,7 +310,7 @@ By following this phased approach, we can systematically improve test coverage a
 | Date | Component/Module | Tests Added | Coverage Increase |
 |------|-----------------|-------------|-------------------|
 | Current | Initial Coverage | - | 6.29% statements, 7.16% branches, 5.76% functions, 6.22% lines |
-| Today | `components/ui/form/textarea.tsx` | 16 tests | +0.43% statements, +0% branches, +0.65% functions, +0.45% lines |
+| Today | `components/ui/form/textarea.tsx` | 27 tests | +0.43% statements, +0% branches, +0.65% functions, +0.45% lines |
 
 ## Recently Added Tests
 
@@ -319,11 +319,13 @@ By following this phased approach, we can systematically improve test coverage a
 A comprehensive test suite was implemented for the `textarea.tsx` component including:
 
 - **Rendering tests**: Validating proper rendering with default props, custom className, placeholder text, and class merging
-- **Behavior tests**: Testing value updates when typing, controlled component behavior, onChange handling, and disabled state
-- **Focus/Blur tests**: Verifying proper event handling and focus-visible styling
-- **Form integration tests**: Testing integration with form submission and required attributes
-- **ForwardRef tests**: Validating proper ref forwarding to the underlying HTML element
-- **Accessibility tests**: Checking ARIA attributes and accessibility features
+- **Controlled vs Uncontrolled tests**: Testing defaultValue behavior, controlled state updates, and proper value handling
+- **Resizing behavior tests**: Verifying resize attribute support and minimum height application
+- **Accessibility tests**: Checking ARIA attributes, focus management, and axe violations
+- **Form integration tests**: Testing integration with forms, validation behaviors and required attributes
+- **Character count and limitations tests**: Testing maxLength behavior and character count display
+- **Placeholder behavior tests**: Verifying placeholder display in different states
+- **ForwardRef tests**: Validating proper ref forwarding to the underlying textarea element
 
 This implementation follows the test template pattern established in `docs/testing/TEST-TEMPLATE.md` and serves as a model for future component test implementations.
 
@@ -331,4 +333,4 @@ This implementation follows the test template pattern established in `docs/testi
 
 1. Implement tests for `form.tsx` component, which is a critical form component with 0% coverage
 2. Implement tests for `select.tsx` component, which has complex functionality
-3. Continue with implementation of the test plan as outlined in `docs/testing/COVERAGE-PLAN.md` 
+3. Continue with implementation of the test plan as outlined in `docs/testing/COVERAGE-PLAN.md`
