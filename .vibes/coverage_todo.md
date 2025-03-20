@@ -10,8 +10,8 @@ vibes
 ## Phase 1: Form Components
 - [x] Implement Input Component Tests
 - [x] Expand Textarea Component Tests
-- [ ] Implement Checkbox Component Tests
-- [ ] Implement Select Component Tests
+- [x] Implement Checkbox Component Tests
+- [x] Implement Select Component Tests
 - [ ] Implement Form Component Tests
 
 ## Phase 2: UI Utility Components

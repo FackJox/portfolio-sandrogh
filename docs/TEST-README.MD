@@ -32,6 +32,7 @@ Special patterns for testing specific component types:
 ### UI Component Test Documentation
 
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, events, accessibility, and ref forwarding
+- [Checkbox Component Testing](testing/components/checkbox.md) - Complete testing of the Checkbox component covering rendering, state management, keyboard interactions, accessibility, and form integration
 - [Input Component Testing](testing/components/input.md) - Complete testing of the Input component covering rendering, controlled input, disabled state, events, accessibility, and ref forwarding
 - [Textarea Component Testing](testing/components/textarea.md) - Thorough testing of the Textarea component covering rendering, controlled/uncontrolled input, resizing behavior, accessibility, form integration, and character limitations
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility

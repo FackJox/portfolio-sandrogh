@@ -12,11 +12,20 @@ The following components have comprehensive test coverage:
 
 1. [Button Component](button.md) - Testing various variants, sizes, events, and accessibility
 2. [Input Component](input.md) - Testing rendering, controlled input, disabled state, events, accessibility, and ref forwarding
-3. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
-4. [Hero Section Component](hero.md) - Testing headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
-5. [About Section Component](about.md) - Testing section title, biography text, image rendering, client logo grid, responsive layout, and accessibility
+3. [Checkbox Component](checkbox.md) - Testing rendering, state management, keyboard interactions, accessibility, and form integration
+4. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
+5. [Hero Section Component](hero.md) - Testing headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
+6. [About Section Component](about.md) - Testing section title, biography text, image rendering, client logo grid, responsive layout, and accessibility
 
 ### Recent Additions
+
+The Checkbox component tests were recently enhanced, achieving 100% code coverage:
+- Tests rendering in different states (checked/unchecked)
+- Tests both controlled and uncontrolled behavior
+- Tests keyboard interactions (Space key toggle)
+- Tests label associations and click behavior
+- Verifies accessibility features (ARIA attributes, focus indicators)
+- Tests form integration and value submission
 
 The About section component tests were recently added, achieving 100% code coverage:
 - Tests section title and biography text rendering
