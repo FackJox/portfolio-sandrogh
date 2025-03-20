@@ -4,11 +4,11 @@ vibes
 # Test Coverage Implementation Todo List
 
 ## Phase 0: Testing Infrastructure and Foundations
-- [ ] Set up Testing Utilities and Helpers
-- [ ] Create Component Test Template
+- [x] Set up Testing Utilities and Helpers
+- [x] Create Component Test Template
 
 ## Phase 1: Form Components
-- [ ] Implement Input Component Tests
+- [x] Implement Input Component Tests
 - [ ] Expand Textarea Component Tests
 - [ ] Implement Checkbox Component Tests
 - [ ] Implement Select Component Tests
