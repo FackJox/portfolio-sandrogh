@@ -29,6 +29,23 @@ Special patterns for testing specific component types:
 4. **Responsive Components** - Use `mockWindowResize` to test at different viewport sizes. See [Testing Responsive Behaviors](testing/COMPONENT-TESTING.md#testing-responsive-behaviors)
 5. **Accessibility Features** - Test ARIA attributes, keyboard navigation, and focus management. See [Testing Accessibility Features](testing/COMPONENT-TESTING.md#testing-accessibility-features)
 
+### Custom Hooks Testing
+
+When testing custom hooks, follow these guidelines:
+
+1. Use `renderHook` from React Testing Library to test hooks in isolation
+2. Use `act` to test state updates and side effects
+3. Test both the initial state and state after updates
+4. Test error handling and edge cases
+5. Test cleanup functions to prevent memory leaks
+6. Test integration with components when appropriate
+
+For comprehensive custom hook testing guidelines, see [Custom Hook Testing Documentation](testing/hooks/README.md).
+
+Key custom hook testing documentation:
+
+1. **useToast Hook Testing** - Complete testing of the toast notification system. See [useToast Hook Testing Documentation](testing/hooks/use-toast.md)
+
 ### UI Component Test Documentation
 
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, loading states, disabled state behavior, keyboard interaction, focus styles, accessibility features, event handlers, and rendering as different HTML elements

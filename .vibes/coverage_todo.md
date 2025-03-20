@@ -29,8 +29,8 @@ vibes
 - [x] Implement Contact Section Tests
 
 ## Phase 5: Custom Hooks
-- [ ] Implement useToast Hook Tests
-- [ ] Implement useScrollCarousel Hook Tests
+- [x] Implement useToast Hook Tests
+- [x] Implement useScrollCarousel Hook Tests
 - [ ] Implement useMobile Hook Tests
 
 ## Phase 6: Page Component Tests
