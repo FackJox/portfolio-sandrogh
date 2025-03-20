@@ -21,6 +21,14 @@ When testing UI components, follow these guidelines:
 
 For comprehensive component testing guidelines, see [Component Testing Documentation](testing/COMPONENT-TESTING.md).
 
+Special patterns for testing specific component types:
+
+1. **Radix UI Components** - Use the `createRadixTester` utility and custom render function with context providers. See [Testing Radix UI Components](testing/COMPONENT-TESTING.md#testing-radix-ui-components-with-proper-context)
+2. **Components with forwardRef** - Test ref forwarding with both default elements and when using `asChild`. See [Testing Components with forwardRef](testing/COMPONENT-TESTING.md#testing-components-with-forwardref)
+3. **Components with cva Variants** - Test each variant combination systematically using the `hasClasses` utility. See [Testing Components with Multiple Variants](testing/COMPONENT-TESTING.md#testing-components-with-multiple-variants-cva)
+4. **Responsive Components** - Use `mockWindowResize` to test at different viewport sizes. See [Testing Responsive Behaviors](testing/COMPONENT-TESTING.md#testing-responsive-behaviors)
+5. **Accessibility Features** - Test ARIA attributes, keyboard navigation, and focus management. See [Testing Accessibility Features](testing/COMPONENT-TESTING.md#testing-accessibility-features)
+
 ### UI Component Test Documentation
 
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, events, accessibility, and ref forwarding
@@ -204,4 +212,122 @@ When writing tests, follow these principles:
 - [Component Tests](./testing/components/README.md) - Tests for UI components
 - [Component Testing Guidelines](./testing/COMPONENT-TESTING.md) - Guidelines for testing UI components
 - [Integration Testing](./testing/INTEGRATION-TESTING.md) - Approach for testing component interactions
-- [E2E Testing](./testing/E2E-TESTING.md) - End-to-end testing documentation 
+- [E2E Testing](./testing/E2E-TESTING.md) - End-to-end testing documentation
+
+# Test Coverage Analysis and Improvement Plan
+
+## Current Coverage Status
+
+As of the latest test run, the project has the following coverage metrics:
+- **Statements**: 6.29% (Target: 40%)
+- **Branches**: 7.16% (Target: 30%)
+- **Functions**: 5.76% (Target: 40%)
+- **Lines**: 6.22% (Target: 40%)
+
+## Well-Tested Components
+
+The following components have excellent test coverage (100%):
+- `lib/utils.ts`
+- `components/layout/Header.tsx`
+- `components/sections/Hero.tsx`
+- `components/sections/About.tsx`
+- `components/ui/form/button.tsx`
+- `components/ui/form/checkbox.tsx`
+- `components/ui/form/input.tsx`
+- `components/ui/form/input-otp.tsx` (95.83% lines)
+
+## Critical Coverage Gaps
+
+The following areas have the most critical coverage gaps:
+
+### High Impact UI Components
+1. **Form components** - These are fundamental building blocks used throughout the application:
+   - `components/ui/form/form.tsx` (0%)
+   - `components/ui/form/select.tsx` (0%)
+   - `components/ui/form/textarea.tsx` (0%)
+
+2. **Overlay components** - Essential for user interaction:
+   - `components/ui/overlay/dialog.tsx` (0%)
+   - `components/ui/overlay/popover.tsx` (0%)
+   - `components/ui/overlay/dropdown-menu.tsx` (0%)
+
+### Core Application Logic
+1. **App Pages**:
+   - `app/page.tsx` (0%)
+   - `app/portfolio/page.tsx` (0%)
+
+2. **Section Components**:
+   - `components/sections/featured-work-carousel.tsx` (0%)
+   - `components/sections/Testimonials.tsx` (0%)
+   - `components/sections/Contact.tsx` (0%)
+
+### Utilities and Hooks
+- `hooks/use-toast.ts` (0%)
+- `hooks/use-scroll-carousel.tsx` (0%)
+- `hooks/use-mobile.tsx` (0%)
+
+## Improvement Plan
+
+### Phase 1: Core UI Components (Target: 20% overall coverage)
+1. Create tests for most-used form components:
+   - `form.tsx` - Test form validation, submission handling, and error display
+   - `select.tsx` - Test selection functionality, keyboard navigation, and accessibility
+   - `textarea.tsx` - Test value changes, controlled behavior, and styling variants
+
+2. Add tests for critical overlay components:
+   - `dialog.tsx` - Test opening/closing, focus management, and accessibility
+   - `popover.tsx` - Test triggering, positioning, and accessibility
+
+### Phase 2: Application Pages and Sections (Target: 30% overall coverage)
+1. Test main application pages:
+   - `app/page.tsx` - Test rendering of main sections and layout structure
+   - `app/portfolio/page.tsx` - Test portfolio item display and filtering
+
+2. Test key section components:
+   - `featured-work-carousel.tsx` - Test carousel navigation and item display
+   - `Contact.tsx` - Test form submission and validation
+
+### Phase 3: Hooks and Utilities (Target: 40% overall coverage)
+1. Test custom hooks:
+   - `use-toast.ts` - Test toast creation, dismissal, and styling
+   - `use-scroll-carousel.tsx` - Test scroll behavior and item selection
+   - `use-mobile.tsx` - Test viewport detection logic
+
+### Testing Approach
+1. Focus on behavioral testing rather than implementation details
+2. Ensure accessibility testing is included in all UI component tests
+3. Prioritize tests for components used in multiple places in the application
+4. Use snapshot testing judiciously for stable UI components
+
+## Conclusion
+By following this phased approach, we can systematically improve test coverage across the codebase. The plan focuses on the most critical components first, gradually working toward the coverage thresholds of 40% for statements, 30% for branches, 40% for functions, and 40% for lines.
+
+# Test Coverage Progress
+
+## Implementation Progress
+
+| Date | Component/Module | Tests Added | Coverage Increase |
+|------|-----------------|-------------|-------------------|
+| Current | Initial Coverage | - | 6.29% statements, 7.16% branches, 5.76% functions, 6.22% lines |
+| Today | `components/ui/form/textarea.tsx` | 16 tests | +0.43% statements, +0% branches, +0.65% functions, +0.45% lines |
+
+## Recently Added Tests
+
+### Textarea Component
+
+A comprehensive test suite was implemented for the `textarea.tsx` component including:
+
+- **Rendering tests**: Validating proper rendering with default props, custom className, placeholder text, and class merging
+- **Behavior tests**: Testing value updates when typing, controlled component behavior, onChange handling, and disabled state
+- **Focus/Blur tests**: Verifying proper event handling and focus-visible styling
+- **Form integration tests**: Testing integration with form submission and required attributes
+- **ForwardRef tests**: Validating proper ref forwarding to the underlying HTML element
+- **Accessibility tests**: Checking ARIA attributes and accessibility features
+
+This implementation follows the test template pattern established in `docs/testing/TEST-TEMPLATE.md` and serves as a model for future component test implementations.
+
+## Next Steps
+
+1. Implement tests for `form.tsx` component, which is a critical form component with 0% coverage
+2. Implement tests for `select.tsx` component, which has complex functionality
+3. Continue with implementation of the test plan as outlined in `docs/testing/COVERAGE-PLAN.md` 
