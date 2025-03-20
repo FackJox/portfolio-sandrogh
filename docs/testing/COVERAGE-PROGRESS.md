@@ -25,6 +25,7 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 | components/ui/form/input.tsx | 100% | 100% | 100% | 100% |
 | components/ui/form/input-otp.tsx | 96.29% | 95.45% | 100% | 95.83% |
 | components/ui/theming/theme-provider.tsx | 100% | 0% | 100% | 100% |
+| components/sections/Hero.tsx | 100% | 100% | 100% | 100% |
 
 ### Priority Areas For Improvement
 
@@ -37,7 +38,6 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 * `components/sections/`:
   * About.tsx
   * Contact.tsx
-  * Hero.tsx
   * InstagramFeed.tsx
   * MediaCategories.tsx
   * Testimonials.tsx
@@ -57,7 +57,7 @@ This document tracks the test coverage progress for the Sandro Portfolio project
 
 Based on the current coverage report, the following gaps have been identified:
 
-1. **Section Components**: 0% coverage across all section components. These components make up a significant portion of the application's UI and business logic.
+1. **Section Components**: Started adding coverage with Hero.tsx at 100%. Other section components still at 0% coverage. These components make up a significant portion of the application's UI and business logic.
 
 2. **Hooks**: 0% coverage for all custom hooks. Hooks contain critical business logic and should be thoroughly tested.
 
@@ -76,8 +76,9 @@ Based on the current coverage report, the following gaps have been identified:
 
 | Date | Statements | Branches | Functions | Lines | Notes |
 |------|------------|----------|-----------|-------|-------|
-| Latest | 5.25% | 7.16% | 3.20% | 5.14% | Added comprehensive tests for Input component |
-| Previous | 4.82% | 7.16% | 2.56% | 4.69% | Initial measurement after setting new thresholds |
+| Current | ~5.25% | ~7.16% | ~3.20% | ~5.14% | Added 100% test coverage for Hero component |
+| Previous | 5.25% | 7.16% | 3.20% | 5.14% | Added comprehensive tests for Input component |
+| Initial | 4.82% | 7.16% | 2.56% | 4.69% | Initial measurement after setting new thresholds |
 
 ## Notes
 

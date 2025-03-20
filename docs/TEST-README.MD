@@ -26,6 +26,7 @@ For comprehensive component testing guidelines, see [Component Testing Documenta
 - [Button Component Testing](testing/components/button.md) - Comprehensive testing of the Button component including variants, sizes, events, accessibility, and ref forwarding
 - [Input Component Testing](testing/components/input.md) - Complete testing of the Input component covering rendering, controlled input, disabled state, events, accessibility, and ref forwarding
 - [Header Component Testing](testing/components/header.md) - Testing of the Header layout component including navigation links, responsive behavior, mobile menu, and accessibility
+- [Hero Component Testing](testing/components/hero.md) - Testing of the Hero section component including headline text, subheadline, CTA buttons, image rendering, responsive layout, and accessibility
 
 ### Integration Testing
 
