@@ -19,7 +19,7 @@ vibes
 - [x] Implement Toast Component Tests
 
 ## Phase 3: Overlay Components
-- [ ] Implement Dialog Component Tests
+- [x] Implement Dialog Component Tests
 - [ ] Implement Popover Component Tests
 - [ ] Implement Dropdown Menu Component Tests
 
