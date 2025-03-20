@@ -10,7 +10,7 @@ We use React Testing Library to test our UI components, focusing on testing the 
 
 The following components have comprehensive test coverage:
 
-1. [Button Component](button.md) - Testing various variants, sizes, events, and accessibility
+1. [Button Component](button.md) - Testing various variants, sizes, loading states, disabled state behavior, keyboard interaction, focus styles, accessibility features, event handlers, and rendering as different HTML elements
 2. [Input Component](input.md) - Testing rendering, controlled input, disabled state, events, accessibility, and ref forwarding
 3. [Checkbox Component](checkbox.md) - Testing rendering, state management, keyboard interactions, accessibility, and form integration
 4. [Header Component](header.md) - Testing navigation functionality, responsive behavior, and accessibility
@@ -69,7 +69,7 @@ When testing components that use Radix UI primitives:
 ## Example Test
 
 ```tsx
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '@/components/ui/button';
 
@@ -100,8 +100,33 @@ describe('Button', () => {
     button = screen.getByRole('button', { name: /button/i });
     expect(button).toHaveClass('bg-destructive');
   });
+  
+  it('renders correctly in loading state', () => {
+    render(<Button isLoading>Loading</Button>);
+    
+    const button = screen.getByRole('button');
+    const spinner = within(button).getByRole('status');
+    
+    expect(spinner).toBeInTheDocument();
+    expect(button).toBeDisabled();
+    expect(button).toHaveTextContent('Loading');
+  });
+  
+  it('handles keyboard interaction', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    
+    render(<Button onClick={handleClick}>Press Enter</Button>);
+    
+    const button = screen.getByRole('button', { name: 'Press Enter' });
+    button.focus();
+    
+    await user.keyboard('{Enter}');
+    expect(handleClick).toHaveBeenCalledTimes(1);
+    
+    expect(button).toHaveClass('focus-visible:ring-2');
+  });
 });
-```
 
 ## Testing Component Composition
 

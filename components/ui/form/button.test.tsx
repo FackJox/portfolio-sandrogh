@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button, buttonVariants } from './button';
 import { hasClasses, hasDataAttribute } from '../../../__tests__/utils/test-utils';
@@ -216,5 +216,106 @@ describe('Button', () => {
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', 'https://example.com');
     expect(link).toHaveClass('bg-primary'); // Should inherit button styles
+  });
+  
+  // Test loading state
+  it('renders correctly in loading state', () => {
+    render(<Button isLoading>Submit</Button>);
+    
+    const button = screen.getByRole('button');
+    const spinner = within(button).getByRole('status');
+    
+    // Verify spinner is shown
+    expect(spinner).toBeInTheDocument();
+    
+    // Verify button is disabled when loading
+    expect(button).toBeDisabled();
+    expect(button).toHaveAttribute('aria-disabled', 'true');
+    
+    // Verify button maintains text (for a11y)
+    expect(button).toHaveTextContent('Submit');
+  });
+  
+  it('prevents clicks when in loading state', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    
+    render(<Button isLoading onClick={handleClick}>Submit</Button>);
+    
+    const button = screen.getByRole('button');
+    await user.click(button);
+    
+    // Click handler should not be called when button is in loading state
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+  
+  it('applies correct styling to loading spinner', () => {
+    render(<Button isLoading>Submit</Button>);
+    
+    const button = screen.getByRole('button');
+    const spinner = within(button).getByRole('status');
+    
+    // Test spinner styling
+    expect(spinner).toHaveClass('animate-spin');
+    expect(spinner).toHaveClass('size-4');
+    expect(spinner).toHaveClass('text-current');
+    expect(spinner).toHaveClass('opacity-70');
+    
+    // Verify proper aria labels
+    expect(spinner).toHaveAttribute('aria-label', 'Loading');
+  });
+  
+  // Test icon positioning
+  it('positions icon correctly based on iconPosition prop', () => {
+    // Test left-positioned icon (default)
+    const { rerender } = render(
+      <Button>
+        <svg data-testid="test-icon" />
+        <span>Button Text</span>
+      </Button>
+    );
+    
+    let button = screen.getByRole('button');
+    const icon = screen.getByTestId('test-icon');
+    const textNode = screen.getByText('Button Text');
+    
+    // In the DOM, the icon should be before the text node for left positioning
+    expect(button.innerHTML.indexOf(icon.outerHTML)).toBeLessThan(
+      button.innerHTML.indexOf(textNode.outerHTML)
+    );
+    
+    // Test right-positioned icon
+    rerender(
+      <Button iconPosition="right">
+        <svg data-testid="test-icon" />
+        <span>Button Text</span>
+      </Button>
+    );
+    
+    button = screen.getByRole('button');
+    
+    // In the DOM, the icon should be after the text node for right positioning
+    expect(button.innerHTML.indexOf(icon.outerHTML)).toBeGreaterThan(
+      button.innerHTML.indexOf(textNode.outerHTML)
+    );
+  });
+  
+  // Test keyboard interaction
+  it('handles keyboard interactions properly', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    
+    render(<Button onClick={handleClick}>Press Enter</Button>);
+    
+    const button = screen.getByRole('button', { name: 'Press Enter' });
+    button.focus();
+    
+    // Test that Enter key triggers the click handler
+    await user.keyboard('{Enter}');
+    expect(handleClick).toHaveBeenCalledTimes(1);
+    
+    // Test that Space key triggers the click handler
+    await user.keyboard(' ');
+    expect(handleClick).toHaveBeenCalledTimes(2);
   });
 }); 

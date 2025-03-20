@@ -12,10 +12,12 @@ The Button component is built on Radix UI's Slot primitive and uses class-varian
 - Accessibility features
 - Ref forwarding
 - Icon support with automatic styling
+- Loading states with spinner integration
+- Keyboard interaction and focus management
 
 ## Test Approach
 
-The Button component tests focus on seven key areas:
+The Button component tests focus on eight key areas:
 
 1. **Default Rendering**: Verifying the component renders correctly with default props
 2. **Variant Testing**: Ensuring all visual variants apply the correct Tailwind classes
@@ -24,6 +26,7 @@ The Button component tests focus on seven key areas:
 5. **Accessibility**: Verifying accessibility attributes and states
 6. **Ref Forwarding**: Testing the forwardRef implementation works correctly
 7. **Styling Utilities**: Validating Tailwind class integration and composition
+8. **Loading States**: Testing loading state behavior and spinner integration
 
 ## Test Implementation
 
@@ -193,6 +196,62 @@ it('maintains accessibility attributes', () => {
 });
 ```
 
+### Keyboard Interaction Testing
+
+Tests handling of keyboard navigation and focus styles.
+
+```tsx
+it('handles keyboard interactions properly', async () => {
+  const handleClick = jest.fn();
+  const user = userEvent.setup();
+  
+  render(<Button onClick={handleClick}>Press Enter</Button>);
+  
+  const button = screen.getByRole('button', { name: 'Press Enter' });
+  button.focus();
+  
+  // Test that Enter key triggers the click handler
+  await user.keyboard('{Enter}');
+  expect(handleClick).toHaveBeenCalledTimes(1);
+  
+  // Test that Space key triggers the click handler
+  await user.keyboard(' ');
+  expect(handleClick).toHaveBeenCalledTimes(2);
+  
+  // Test focus styles
+  expect(button).toHaveClass('focus-visible:ring-2');
+  expect(button).toHaveClass('focus-visible:ring-ring');
+});
+
+it('supports proper tab navigation', async () => {
+  const user = userEvent.setup();
+  
+  render(
+    <>
+      <button>First Button</button>
+      <Button>Target Button</Button>
+      <button>Last Button</button>
+    </>
+  );
+  
+  // Get all buttons
+  const firstButton = screen.getByRole('button', { name: 'First Button' });
+  const targetButton = screen.getByRole('button', { name: 'Target Button' });
+  const lastButton = screen.getByRole('button', { name: 'Last Button' });
+  
+  // Start with focus on first button
+  firstButton.focus();
+  
+  // Tab to our component button
+  await user.tab();
+  expect(document.activeElement).toBe(targetButton);
+  
+  // Tab to the last button
+  await user.tab();
+  expect(document.activeElement).toBe(lastButton);
+});
+```
+
 ### Ref Forwarding
 
 Tests the forwardRef implementation works correctly.
@@ -256,6 +315,65 @@ it('applies Tailwind utility classes consistently', () => {
 });
 ```
 
+### Loading State Testing
+
+Tests the button's behavior when in a loading state.
+
+```tsx
+it('renders correctly in loading state', () => {
+  render(
+    <Button isLoading>
+      Submit
+    </Button>
+  );
+  
+  const button = screen.getByRole('button');
+  const spinner = within(button).getByRole('status');
+  
+  // Verify spinner is shown
+  expect(spinner).toBeInTheDocument();
+  
+  // Verify button is disabled when loading
+  expect(button).toBeDisabled();
+  expect(button).toHaveAttribute('aria-disabled', 'true');
+  
+  // Verify button maintains text (for a11y)
+  expect(button).toHaveTextContent('Submit');
+});
+
+it('prevents clicks when in loading state', async () => {
+  const handleClick = jest.fn();
+  const user = userEvent.setup();
+  
+  render(
+    <Button isLoading onClick={handleClick}>
+      Submit
+    </Button>
+  );
+  
+  const button = screen.getByRole('button');
+  await user.click(button);
+  
+  // Click handler should not be called when button is in loading state
+  expect(handleClick).not.toHaveBeenCalled();
+});
+
+it('applies correct styling to loading spinner', () => {
+  render(<Button isLoading>Submit</Button>);
+  
+  const button = screen.getByRole('button');
+  const spinner = within(button).getByRole('status');
+  
+  // Test spinner styling
+  expect(spinner).toHaveClass('animate-spin');
+  expect(spinner).toHaveClass('size-4');
+  expect(hasClasses(spinner, ['text-current', 'opacity-70'])).toBe(true);
+  
+  // Verify proper aria labels
+  expect(spinner).toHaveAttribute('aria-label', 'Loading');
+});
+```
+
 ## Additional Tests
 
 ### Component Composition
@@ -276,6 +394,31 @@ it('renders as a child component when asChild is true', () => {
   expect(link).toHaveClass('bg-primary'); // Should inherit button styles
   expect(link).toHaveClass('text-primary-foreground');
   expect(link).toHaveClass('hover:bg-primary/90');
+});
+
+it('renders as different HTML elements while maintaining button styling', () => {
+  // Test rendering as div with role="button"
+  const { rerender } = render(
+    <Button asChild>
+      <div role="button" tabIndex={0}>Div Button</div>
+    </Button>
+  );
+  
+  let element = screen.getByRole('button', { name: 'Div Button' });
+  expect(element.tagName).toBe('DIV');
+  expect(element).toHaveAttribute('tabIndex', '0');
+  expect(hasClasses(element, buttonVariants())).toBe(true);
+  
+  // Test rendering as custom component
+  rerender(
+    <Button asChild>
+      <summary>Summary Button</summary>
+    </Button>
+  );
+  
+  element = screen.getByText('Summary Button');
+  expect(element.tagName).toBe('SUMMARY');
+  expect(hasClasses(element, buttonVariants())).toBe(true);
 });
 ```
 
@@ -302,6 +445,35 @@ it('renders correctly with icon children', () => {
   expect(button).toHaveClass('[&_svg]:size-4');
   expect(button).toHaveClass('[&_svg]:shrink-0');
 });
+
+it('positions icon correctly based on iconPosition prop', () => {
+  // Test left-positioned icon (default)
+  const { rerender } = render(
+    <Button>
+      <svg data-testid="test-icon" />
+      <span>Button Text</span>
+    </Button>
+  );
+  
+  const button = screen.getByRole('button');
+  let icon = screen.getByTestId('test-icon');
+  
+  // Check the DOM order reflects visual order
+  expect(button.children[0]).toBe(icon);
+  expect(button.children[1].textContent).toBe('Button Text');
+  
+  // Test right-positioned icon
+  rerender(
+    <Button iconPosition="right">
+      <span>Button Text</span>
+      <svg data-testid="test-icon" />
+    </Button>
+  );
+  
+  icon = screen.getByTestId('test-icon');
+  expect(button.children[0].textContent).toBe('Button Text');
+  expect(button.children[1]).toBe(icon);
+});
 ```
 
 ## Best Practices
@@ -315,8 +487,10 @@ When testing the Button component:
 5. Test composition patterns with asChild
 6. Verify that custom class names are properly merged
 7. Test both the presence and absence of classes based on props
-8. Verify that all interactive states (hover, focus, disabled) are properly styled
+8. Verify that all interactive states (hover, focus, disabled, loading) are properly styled
 9. Test that icon children receive the correct styling through arbitrary variants
+10. Test keyboard interactions to ensure accessibility
+11. Verify loading state behavior and associated accessibility attributes
 
 ## Related Documentation
 
