@@ -3,7 +3,7 @@ import { Mail, Instagram, Twitter } from "lucide-react"
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 bg-zinc-900">
+    <section id="contact" className="py-20 bg-zinc-900" data-testid="contact-section">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">LET&apos;S CONNECT</h2>
