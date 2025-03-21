@@ -11,6 +11,7 @@ This document outlines the patterns and best practices for testing custom hooks 
 5. [Common Test Cases](#common-test-cases)
 6. [Hook Integration Testing](#hook-integration-testing)
 7. [Example: useToast](#example-usetoast)
+8. [Example: useIsMobile](#example-usemobile)
 
 ## Introduction
 
@@ -115,6 +116,56 @@ it('fetches data asynchronously', async () => {
 });
 ```
 
+### 6. Testing Browser APIs
+
+For hooks that interact with browser APIs (like viewport dimensions, window events, etc.), mock the relevant browser APIs.
+
+```tsx
+// Mock window.matchMedia for a responsive hook
+const mockMatchMedia = jest.fn();
+window.matchMedia = mockMatchMedia;
+
+mockMatchMedia.mockImplementation((query) => ({
+  matches: false,
+  media: query,
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+}));
+
+// Then test the hook
+const { result } = renderHook(() => useMediaQuery('(min-width: 768px)'));
+```
+
+### 7. Testing with Timers
+
+For hooks that use timers or debounce/throttle mechanisms, use Jest's timer mocks.
+
+```tsx
+// Setup fake timers
+jest.useFakeTimers();
+
+it('debounces the function call', () => {
+  const { result } = renderHook(() => useDebounce(callback, 500));
+  
+  act(() => {
+    result.current();
+    result.current();
+    result.current();
+  });
+  
+  // Callback should not be called immediately
+  expect(callback).not.toHaveBeenCalled();
+  
+  // Advance timers
+  act(() => {
+    jest.advanceTimersByTime(500);
+  });
+  
+  // Callback should be called once
+  expect(callback).toHaveBeenCalledTimes(1);
+});
+```
+
 ## Test Structure
 
 Structure your custom hook tests with descriptive blocks that separate different aspects of the hook:
@@ -200,4 +251,24 @@ The useToast hook tests demonstrate:
 5. Testing integration with Toast component
 6. Testing context provider
 7. Testing error handling
-8. Testing cleanup and memory management 
+8. Testing cleanup and memory management
+
+## Example: useIsMobile
+
+See the [useIsMobile Testing Documentation](./use-mobile.md) for a comprehensive example of testing a responsive hook that handles viewport detection.
+
+The useIsMobile hook tests demonstrate:
+
+1. Testing viewport width detection logic
+2. Testing resize event handling
+3. Testing debounce functionality for performance optimization
+4. Testing integration with responsive components
+5. Testing SSR compatibility
+6. Testing orientation change handling
+
+This example shows patterns for testing all viewport and device detection hooks, including:
+
+1. Mocking browser viewport APIs (window.matchMedia, window.innerWidth)
+2. Testing timing-sensitive code with Jest fake timers
+3. Simulating browser events
+4. Testing hooks that should work in SSR contexts 

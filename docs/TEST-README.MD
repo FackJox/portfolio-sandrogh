@@ -45,6 +45,8 @@ For comprehensive custom hook testing guidelines, see [Custom Hook Testing Docum
 Key custom hook testing documentation:
 
 1. **useToast Hook Testing** - Complete testing of the toast notification system. See [useToast Hook Testing Documentation](testing/hooks/use-toast.md)
+2. **useScrollCarousel Hook Testing** - Comprehensive testing of the scroll-based carousel hook. See [useScrollCarousel Hook Testing Documentation](testing/hooks/use-scroll-carousel.md)
+3. **useIsMobile Hook Testing** - Complete testing of the mobile device detection hook, including patterns for testing viewport/device detection hooks. See [useIsMobile Hook Testing Documentation](testing/hooks/use-mobile.md)
 
 ### UI Component Test Documentation
 
@@ -211,6 +213,7 @@ Coverage reports are generated automatically when running tests.
 - `components/ui/form/form.tsx`: 95.45% with only 2 uncovered lines
 - `components/ui/overlay/dialog.tsx`: 91.66% lines
 - `components/ui/overlay/dropdown-menu.tsx`: 100% coverage
+- `hooks/use-mobile.tsx`: 95% statements, 66.66% branches, 100% functions and lines
 
 For detailed coverage analysis and improvement plans, see the [Coverage Progress](./testing/COVERAGE-PROGRESS.md) document.
 
@@ -270,3 +273,4 @@ The following components have excellent test coverage (100%):
 - `components/ui/form/input.tsx` (100% on all metrics)
 - `components/ui/form/textarea.tsx` (100% on all metrics)
 - `components/ui/form/input-otp.tsx` (95.83% lines)
+- `hooks/use-scroll-carousel.tsx` (97.43% statements, 90% branches, 100% functions and lines)
