@@ -1,0 +1,300 @@
+
+> my-v0-project@0.1.0 test
+> jest __tests__/app/portfolio/page.test.tsx --coverage=false -t shows 'no items found' message --verbose --debug
+
+{
+  "configs": [
+    {
+      "automock": false,
+      "cache": true,
+      "cacheDirectory": "/tmp/jest_rs",
+      "clearMocks": false,
+      "collectCoverageFrom": [
+        "app/**/*.{js,jsx,ts,tsx}",
+        "components/**/*.{js,jsx,ts,tsx}",
+        "lib/**/*.{js,jsx,ts,tsx}",
+        "hooks/**/*.{js,jsx,ts,tsx}",
+        "!**/*.d.ts",
+        "!**/node_modules/**",
+        "!**/.next/**"
+      ],
+      "coverageDirectory": "/home/jack/Projects/dev/sandro-portfolio/coverage",
+      "coveragePathIgnorePatterns": [
+        "/node_modules/"
+      ],
+      "cwd": "/home/jack/Projects/dev/sandro-portfolio",
+      "detectLeaks": false,
+      "detectOpenHandles": false,
+      "errorOnDeprecated": false,
+      "extensionsToTreatAsEsm": [],
+      "fakeTimers": {
+        "enableGlobally": false
+      },
+      "forceCoverageMatch": [],
+      "globals": {},
+      "haste": {
+        "computeSha1": false,
+        "enableSymlinks": false,
+        "forceNodeFilesystemAPI": true,
+        "throwOnModuleCollision": false
+      },
+      "id": "954504e13d64112d0a3ced6cc2ff14bc",
+      "injectGlobals": true,
+      "moduleDirectories": [
+        "node_modules",
+        "/home/jack/Projects/dev/sandro-portfolio"
+      ],
+      "moduleFileExtensions": [
+        "js",
+        "mjs",
+        "cjs",
+        "jsx",
+        "ts",
+        "tsx",
+        "json",
+        "node"
+      ],
+      "moduleNameMapper": [
+        [
+          "^.+\\.module\\.(css|sass|scss)$",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/object-proxy.js"
+        ],
+        [
+          "^.+\\.(css|sass|scss)$",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/styleMock.js"
+        ],
+        [
+          "^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp)$",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/fileMock.js"
+        ],
+        [
+          "^.+\\.(svg)$",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/fileMock.js"
+        ],
+        [
+          "@next/font/(.*)",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/nextFontMock.js"
+        ],
+        [
+          "next/font/(.*)",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/nextFontMock.js"
+        ],
+        [
+          "server-only",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/jest/__mocks__/empty.js"
+        ],
+        [
+          "^@/(.*)$",
+          "/home/jack/Projects/dev/sandro-portfolio/$1"
+        ]
+      ],
+      "modulePathIgnorePatterns": [],
+      "openHandlesTimeout": 1000,
+      "prettierPath": "prettier",
+      "resetMocks": false,
+      "resetModules": false,
+      "restoreMocks": false,
+      "rootDir": "/home/jack/Projects/dev/sandro-portfolio",
+      "roots": [
+        "/home/jack/Projects/dev/sandro-portfolio"
+      ],
+      "runner": "/home/jack/Projects/dev/sandro-portfolio/node_modules/jest-runner/build/index.js",
+      "sandboxInjectedGlobals": [],
+      "setupFiles": [],
+      "setupFilesAfterEnv": [
+        "/home/jack/Projects/dev/sandro-portfolio/jest.setup.js"
+      ],
+      "skipFilter": false,
+      "slowTestThreshold": 5,
+      "snapshotFormat": {
+        "escapeString": false,
+        "printBasicPrototype": false
+      },
+      "snapshotSerializers": [],
+      "testEnvironment": "/home/jack/Projects/dev/sandro-portfolio/node_modules/jest-environment-jsdom/build/index.js",
+      "testEnvironmentOptions": {},
+      "testLocationInResults": false,
+      "testMatch": [
+        "**/__tests__/**/*.test.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/.next/",
+        "/home/jack/Projects/dev/sandro-portfolio/node_modules/",
+        "/home/jack/Projects/dev/sandro-portfolio/.next/",
+        "/home/jack/Projects/dev/sandro-portfolio/__tests__/utils/test-utils.tsx"
+      ],
+      "testRegex": [],
+      "testRunner": "/home/jack/Projects/dev/sandro-portfolio/node_modules/jest-circus/runner.js",
+      "transform": [
+        [
+          "^.+\\.(js|jsx|ts|tsx|mjs)$",
+          "/home/jack/Projects/dev/sandro-portfolio/node_modules/next/dist/build/swc/jest-transformer.js",
+          {
+            "modularizeImports": {
+              "@mui/icons-material": {
+                "transform": "@mui/icons-material/{{member}}"
+              },
+              "lodash": {
+                "transform": "lodash/{{member}}"
+              }
+            },
+            "jsConfig": {
+              "compilerOptions": {
+                "lib": [
+                  "lib.dom.d.ts",
+                  "lib.dom.iterable.d.ts",
+                  "lib.esnext.d.ts"
+                ],
+                "allowJs": true,
+                "target": 2,
+                "skipLibCheck": true,
+                "strict": true,
+                "noEmit": true,
+                "esModuleInterop": true,
+                "module": 99,
+                "moduleResolution": 100,
+                "resolveJsonModule": true,
+                "isolatedModules": true,
+                "jsx": 1,
+                "incremental": true,
+                "plugins": [
+                  {
+                    "name": "next"
+                  }
+                ],
+                "paths": {
+                  "@/*": [
+                    "./*"
+                  ]
+                },
+                "pathsBasePath": "/home/jack/Projects/dev/sandro-portfolio"
+              }
+            },
+            "resolvedBaseUrl": {
+              "baseUrl": "/home/jack/Projects/dev/sandro-portfolio",
+              "isImplicit": true
+            },
+            "serverComponents": true,
+            "isEsmProject": false
+          }
+        ]
+      ],
+      "transformIgnorePatterns": [
+        "/node_modules/(?!.pnpm)(?!(geist)/)",
+        "/node_modules/.pnpm/(?!(geist)@)",
+        "^.+\\.module\\.(css|sass|scss)$"
+      ],
+      "watchPathIgnorePatterns": [
+        "/.next/"
+      ]
+    }
+  ],
+  "globalConfig": {
+    "bail": 0,
+    "changedFilesWithAncestor": false,
+    "ci": false,
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "app/**/*.{js,jsx,ts,tsx}",
+      "components/**/*.{js,jsx,ts,tsx}",
+      "lib/**/*.{js,jsx,ts,tsx}",
+      "hooks/**/*.{js,jsx,ts,tsx}",
+      "!**/*.d.ts",
+      "!**/node_modules/**",
+      "!**/.next/**"
+    ],
+    "coverageDirectory": "/home/jack/Projects/dev/sandro-portfolio/coverage",
+    "coverageProvider": "babel",
+    "coverageReporters": [
+      "json",
+      "text",
+      "lcov",
+      "clover"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 30,
+        "functions": 40,
+        "lines": 40,
+        "statements": 40
+      }
+    },
+    "detectLeaks": false,
+    "detectOpenHandles": false,
+    "errorOnDeprecated": false,
+    "expand": false,
+    "findRelatedTests": false,
+    "forceExit": false,
+    "json": false,
+    "lastCommit": false,
+    "listTests": false,
+    "logHeapUsage": false,
+    "maxConcurrency": 5,
+    "maxWorkers": 23,
+    "noStackTrace": false,
+    "nonFlagArgs": [
+      "__tests__/app/portfolio/page.test.tsx"
+    ],
+    "notify": false,
+    "notifyMode": "failure-change",
+    "onlyChanged": false,
+    "onlyFailures": false,
+    "openHandlesTimeout": 1000,
+    "passWithNoTests": false,
+    "projects": [],
+    "rootDir": "/home/jack/Projects/dev/sandro-portfolio",
+    "runTestsByPath": false,
+    "seed": -932986819,
+    "skipFilter": false,
+    "snapshotFormat": {
+      "escapeString": false,
+      "printBasicPrototype": false
+    },
+    "testFailureExitCode": 1,
+    "testNamePattern": "shows 'no items found' message",
+    "testPathPattern": "__tests__/app/portfolio/page.test.tsx",
+    "testSequencer": "/home/jack/Projects/dev/sandro-portfolio/node_modules/@jest/test-sequencer/build/index.js",
+    "updateSnapshot": "new",
+    "useStderr": false,
+    "verbose": true,
+    "watch": false,
+    "watchAll": false,
+    "watchman": true,
+    "workerThreads": false
+  },
+  "version": "29.7.0"
+}
+  console.error
+    Received `true` for a non-boolean attribute `fill`.
+    
+    If you want to write it to the DOM, pass a string instead: fill="true" or fill={value.toString()}.
+
+      160 |       ])
+      161 |       
+    > 162 |       render(<PortfolioPage />)
+          |             ^
+      163 |       
+      164 |       // Should show no items message
+      165 |       const emptyMessage = screen.getByText(/no items found in this category/i)
+
+      at validateProperty (node_modules/react-dom/cjs/react-dom-client.development.js:2945:27)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom-client.development.js:3021:9)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom-client.development.js:16825:9)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom-client.development.js:17449:7)
+      at completeWork (node_modules/react-dom/cjs/react-dom-client.development.js:13775:18)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:543:16)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom-client.development.js:15179:19)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom-client.development.js:15061:11)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom-client.development.js:14870:41)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom-client.development.js:14850:11)
+      at performWorkOnRoot (node_modules/react-dom/cjs/react-dom-client.development.js:14334:13)
+      at performWorkOnRootViaSchedulerTask (node_modules/react-dom/cjs/react-dom-client.development.js:15931:7)
+      at flushActQueue (node_modules/react/cjs/react.development.js:862:34)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:1151:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:180:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:271:10)
+      at Object.<anonymous> (__tests__/app/portfolio/page.test.tsx:162:13)
+

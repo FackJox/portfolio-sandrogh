@@ -145,6 +145,7 @@ The following components have detailed test documentation:
 
 - [Dialog Component Testing](components/dialog.md) - Testing strategy for Dialog component
 - [Popover Component Testing](components/popover.md) - Testing strategy for Popover component
+- [Portfolio Page Testing](app/portfolio/README.md) - Testing strategy for the Portfolio page component with filtering, interactions, and responsive layout
 
 These documents outline the specific test cases, challenges, and approaches used for testing each component.
 

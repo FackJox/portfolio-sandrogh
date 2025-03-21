@@ -84,6 +84,11 @@ export default function PortfolioPage() {
 
   const filteredItems =
     activeFilter === "all" ? portfolioItems : portfolioItems.filter((item) => item.category === activeFilter)
+    
+  const handleLoadMore = () => {
+    console.log("Load more clicked")
+    // Implementation would be added here
+  }
 
   return (
     <div className="min-h-screen bg-black text-white" suppressHydrationWarning>
@@ -175,11 +180,11 @@ export default function PortfolioPage() {
       </section>
 
       {/* Gallery Grid */}
-      <section className="pb-20 bg-black">
+      <section className="pb-20 bg-black" aria-label="Portfolio gallery" role="region">
         <div className="container px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" data-testid="portfolio-grid">
             {filteredItems.map((item) => (
-              <div key={item.id} className="group relative overflow-hidden rounded-lg aspect-[4/3]">
+              <div key={item.id} className="group relative overflow-hidden rounded-lg aspect-[4/3]" data-testid="portfolio-item">
                 <Image
                   src={item.image || "/placeholder.svg"}
                   alt={item.title}
@@ -189,14 +194,14 @@ export default function PortfolioPage() {
                 {item.category === "motion" && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="bg-black/30 rounded-full p-3">
-                      <Play className="h-8 w-8 text-white" />
+                      <Play className="h-8 w-8 text-white" data-testid="play-icon" />
                     </div>
                     <div className="absolute bottom-4 right-4 bg-black/70 px-2 py-1 rounded text-xs">
                       {item.duration}
                     </div>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center" data-testid="item-overlay">
                   <div className="text-center p-4">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <p className="text-gray-300">{item.description}</p>
@@ -213,7 +218,7 @@ export default function PortfolioPage() {
 
           {filteredItems.length > 0 && (
             <div className="text-center mt-12">
-              <Button variant="outline" className="rounded-full">
+              <Button variant="outline" className="rounded-full" onClick={handleLoadMore}>
                 Load More
               </Button>
             </div>

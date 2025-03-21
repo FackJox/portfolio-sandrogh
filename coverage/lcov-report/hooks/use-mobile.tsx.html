@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15% </span>
+                <span class="strong">95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/20</span>
+                <span class='fraction'>19/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.64% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -114,34 +114,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react"
 &nbsp;
@@ -149,39 +149,39 @@ const MOBILE_BREAKPOINT = 768
 const DEBOUNCE_DELAY = 250 // milliseconds
 &nbsp;
 // Simple debounce function
-function <span class="fstat-no" title="function not covered" >debounce&lt;T extends (...args: any[]) =&gt; any&gt;(</span>
+function debounce&lt;T extends (...args: any[]) =&gt; any&gt;(
   func: T,
   delay: number
 ): (...args: Parameters&lt;T&gt;) =&gt; void {
   let timeoutId: ReturnType&lt;typeof setTimeout&gt;
-<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >function(.</span>..args: Parameters&lt;T&gt;) {</span>
-<span class="cstat-no" title="statement not covered" >    clearTimeout(timeoutId)</span>
-<span class="cstat-no" title="statement not covered" >    timeoutId = setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >f</span>unc(...args), d</span>elay)</span>
+  return function(...args: Parameters&lt;T&gt;) {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() =&gt; func(...args), delay)
   }
 }
 &nbsp;
-export function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >useIsMobile() {</span></span>
-  const [isMobile, setIsMobile] = <span class="cstat-no" title="statement not covered" >React.useState&lt;boolean | undefined&gt;(undefined)</span>
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState&lt;boolean | undefined&gt;(undefined)
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  React.useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof window === 'undefined') <span class="cstat-no" title="statement not covered" >return</span></span>
+  React.useEffect(() =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof window === 'undefined') <span class="cstat-no" title="statement not covered" >return</span>
 &nbsp;
-    const mql = <span class="cstat-no" title="statement not covered" >window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)</span>
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
     
     // Debounced handler for resize events
-    const onChange = <span class="cstat-no" title="statement not covered" >debounce(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >      setIsMobile(window.innerWidth &lt; MOBILE_BREAKPOINT)</span>
+    const onChange = debounce(() =&gt; {
+      setIsMobile(window.innerWidth &lt; MOBILE_BREAKPOINT)
     }, DEBOUNCE_DELAY)
     
-<span class="cstat-no" title="statement not covered" >    mql.addEventListener("change", onChange)</span>
+    mql.addEventListener("change", onChange)
     
     // Initial check without debounce
-<span class="cstat-no" title="statement not covered" >    setIsMobile(window.innerWidth &lt; MOBILE_BREAKPOINT)</span>
+    setIsMobile(window.innerWidth &lt; MOBILE_BREAKPOINT)
     
-<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >m</span>ql.removeEventListener("change", onChange)</span></span>
+    return () =&gt; mql.removeEventListener("change", onChange)
   }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return isMobile ?? false</span>
+  return isMobile ?? false
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -190,7 +190,7 @@ export function <span class="cstat-no" title="statement not covered" ><span clas
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-21T00:09:34.487Z
+                at 2025-03-21T00:26:03.519Z
             </div>
         <script src="../prettify.js"></script>
         <script>
