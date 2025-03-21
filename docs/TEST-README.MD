@@ -274,3 +274,47 @@ The following components have excellent test coverage (100%):
 - `components/ui/form/textarea.tsx` (100% on all metrics)
 - `components/ui/form/input-otp.tsx` (95.83% lines)
 - `hooks/use-scroll-carousel.tsx` (97.43% statements, 90% branches, 100% functions and lines)
+
+## Recently Added Tests
+
+### Main Page Integration Test (app/page.tsx)
+
+We've recently added comprehensive integration tests for the main portfolio page. These tests verify that:
+
+1. The page structure is correctly rendered with proper classes and styling
+2. All section components are present and rendered in the correct order
+3. The page renders correctly at different viewport sizes (mobile, tablet, desktop)
+4. The page has proper accessibility features
+
+**Key Learnings:**
+
+1. **Mock Components for Isolation**: We mocked all section components to isolate the page integration testing from the individual component implementations.
+   
+2. **Test Component Order**: We developed a robust method to verify that components appear in the correct order within the DOM hierarchy:
+   ```tsx
+   // Extract testIds in DOM order
+   const testIds = Array.from(sections).map(el => el.getAttribute('data-testid'))
+   
+   // Verify relative ordering
+   for (let i = 1; i < expectedOrder.length; i++) {
+     const prevIndex = testIds.indexOf(expectedOrder[i-1])
+     const currIndex = testIds.indexOf(expectedOrder[i])
+     expect(currIndex).toBeGreaterThan(prevIndex)
+   }
+   ```
+
+3. **Responsive Testing**: We utilized the viewport testing utilities to verify rendering at different screen sizes:
+   ```tsx
+   renderAtViewport(<Page />, { width: BREAKPOINTS.MOBILE - 1 })
+   ```
+
+4. **Accessibility Testing Challenges**: Full accessibility testing with tools like axe can be time-consuming and may timeout in normal test environments. We implemented a two-tier approach:
+   - Basic accessibility checks for normal test runs
+   - Comprehensive axe checks that can be run separately with longer timeouts
+
+5. **Performance Testing Approach**: We identified areas for future performance testing, particularly around lazy loading and hydration optimizations.
+
+**View the Tests:**
+- [Main Page Integration Test](__tests__/app/page.test.tsx)
+- [Integration Testing Documentation](docs/testing/INTEGRATION-TESTING.md)
+- [Main Page Test Documentation](docs/testing/app/page.md)

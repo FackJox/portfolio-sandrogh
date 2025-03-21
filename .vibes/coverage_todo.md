@@ -34,7 +34,7 @@ vibes
 - [x] Implement useMobile Hook Tests
 
 ## Phase 6: Page Component Tests
-- [ ] Implement Main Page Integration Tests
+- [x] Implement Main Page Integration Tests
 - [ ] Implement Portfolio Page Tests
 
 ## Tracking

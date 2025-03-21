@@ -357,3 +357,48 @@ test('finds elements by data attribute', () => {
 8. Use `createRadixTester` for testing Radix UI components with state changes
 9. Use data attribute queries when testing components that use data attributes for state
 10. Always clean up mocks and event listeners after tests 
+
+### Integration Testing
+
+When testing how components work together as a cohesive unit:
+
+1. Use mocked versions of individual components to isolate the integration testing
+2. Test the overall page structure and component ordering
+3. Verify responsive behavior at different viewport sizes
+4. Test performance optimizations like hydration suppression
+5. Test accessibility at the page level using jest-axe
+
+For a complete example of integration testing, see:
+
+- [Main Page Integration Test](__tests__/app/page.test.tsx) - Integration test for the entire portfolio page
+- [Integration Testing Documentation](../docs/testing/INTEGRATION-TESTING.md) - Comprehensive documentation of our integration testing approach
+- [Main Page Test Documentation](../docs/testing/app/page.md) - Specific documentation for the main page integration test
+
+Key integration testing patterns:
+
+```tsx
+// Mock component dependencies
+jest.mock("@/components/sections/Hero", () => ({
+  Hero: () => <div data-testid="mock-hero">Hero Section</div>
+}))
+
+// Test page structure
+const mainContainer = screen.getByText(/Hero Section/i).closest('div')
+expect(mainContainer).toHaveClass("min-h-screen", "bg-black", "text-white")
+
+// Test component ordering
+const components = ["mock-header", "mock-hero", /* ... */]
+let lastIndex = -1
+for (const component of components) {
+  const currentIndex = allContent.indexOf(component)
+  expect(currentIndex).toBeGreaterThan(lastIndex)
+  lastIndex = currentIndex
+}
+
+// Test at different viewport sizes
+renderAtViewport(<Page />, { width: BREAKPOINTS.MOBILE - 1 })
+
+// Test accessibility
+const results = await axe(container)
+expect(results).toHaveNoViolations()
+``` 
